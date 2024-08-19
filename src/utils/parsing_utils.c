@@ -15,7 +15,6 @@ int	file_size(t_data *data)
 		line = get_next_line(data->fd_map);
 	}
 	close(data->fd_map);
-	printf("ret => %d\n", ret);
 	return (ret);
 }
 
@@ -41,6 +40,19 @@ void	copy_all_file(t_data *data, char *map_name)
 	}
 	close(data->fd_map);
 	return ;
+}
+
+void	all_file_free(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->all_file[i])
+	{
+		free(data->all_file[i]);
+		data->all_file[i] = NULL;
+		i++;
+	}
 }
 
 void	print_exit(char *msg)

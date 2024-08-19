@@ -53,6 +53,7 @@ void	parsing(int ac, char **av, t_data *data)
 {
 	parsing_arg(ac, av, data);
 	copy_all_file(data, av[1]);
-	print_tab(data->all_file);
+	// print_tab(data->all_file);
+	init_pars_data(data);
 	(void)data;
 }

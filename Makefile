@@ -13,6 +13,9 @@ SRCS = src/gnl/get_next_line.c \
        src/gnl/get_next_line_utils.c \
        src/main.c \
 	   src/parsing/parsing.c \
+	   src/parsing/parsing_data.c \
+	   src/parsing/c_colors_parsing.c \
+	   src/parsing/f_colors_parsing.c \
 	   src/utils/libft_utils.c \
 	   src/utils/parsing_utils.c \
 
