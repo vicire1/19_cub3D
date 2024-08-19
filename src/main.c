@@ -1,8 +1,11 @@
 #include "../include/cub3d.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    // parsing
-    printf("Go");
-    return (0);
+	t_data	data;
+
+	// parsing
+	parsing(ac, av, &data);
+	printf("Go");
+	return (0);
 }
