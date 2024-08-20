@@ -47,6 +47,7 @@ void	print_tab(char **tab)
 		printf("%s\n", tab[i]);
 		i++;
 	}
+	printf("\n");
 }
 
 void	parsing(int ac, char **av, t_data *data)
@@ -55,5 +56,6 @@ void	parsing(int ac, char **av, t_data *data)
 	copy_all_file(data, av[1]);
 	// print_tab(data->all_file);
 	init_pars_data(data);
+	pars_map(data);
 	(void)data;
 }

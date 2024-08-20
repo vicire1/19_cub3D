@@ -38,8 +38,19 @@ void	copy_all_file(t_data *data, char *map_name)
 		i++;
 		data->all_file[i] = get_next_line(data->fd_map);
 	}
+	data->all_file[i] = NULL;
 	close(data->fd_map);
 	return ;
+}
+
+int	ft_strlen_before_n_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
 }
 
 void	print_exit(char *msg)

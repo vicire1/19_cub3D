@@ -14,6 +14,7 @@ SRCS = src/gnl/get_next_line.c \
        src/main.c \
 	   src/parsing/parsing.c \
 	   src/parsing/parsing_data.c \
+	   src/parsing/map_parsing.c \
 	   src/parsing/colors_parsing/c_colors_parsing.c \
 	   src/parsing/colors_parsing/f_colors_parsing.c \
 	   src/parsing/walls_parsing/wall_parsing.c \

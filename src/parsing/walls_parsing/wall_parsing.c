@@ -24,7 +24,7 @@ void	check_ea_data(t_data *data)
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_EA_DATA);
 	}
-	printf("EA path good => [%s]\n", data->path_E);
+	printf("EA path good => [%s]\n\n", data->path_E);
 }
 
 void	check_we_data(t_data *data)
