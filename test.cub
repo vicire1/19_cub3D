@@ -1,14 +1,16 @@
 
 C 63,0,39
 
-    F                   22,55,6   
+    F                   22,55,6
 
-NO
 
-         SU
 
-EA
-         WE
+NO       ./test.xpm    
+
+         SO    ./test.xpm
+
+         WE./test.xpm
+EA ./test.xpm
 
 
 111111111111111111111111111

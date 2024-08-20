@@ -42,19 +42,6 @@ void	copy_all_file(t_data *data, char *map_name)
 	return ;
 }
 
-void	all_file_free(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->all_file[i])
-	{
-		free(data->all_file[i]);
-		data->all_file[i] = NULL;
-		i++;
-	}
-}
-
 void	print_exit(char *msg)
 {
 	printf("%s", msg);

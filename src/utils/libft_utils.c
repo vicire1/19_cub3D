@@ -1,5 +1,28 @@
 #include "../../include/cub3d.h"
 
+char	*ft_substr(char const *s, unsigned int start, size_t len, t_data *data)
+{
+	unsigned int	i;
+	char			*ret;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (i < len && start + i < ft_strlen(s))
+		i++;
+	ret = malloc((i + 1) * sizeof(char));
+	if (!ret)
+		free_all(data, ERR_MALLOC, 1);
+	i = 0;
+	while (len > i && start + i < ft_strlen(s))
+	{
+		ret[i] = s[start + i];
+		i++;
+	}
+	ret[i] = 0;
+	return (ret);
+}
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;

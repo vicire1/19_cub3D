@@ -11,7 +11,6 @@ int	check_empty_line_data(char *str)
 			return (1);
 		i++;
 	}
-	// printf("ENPTY OK\n");
 	return (0);
 }
 
@@ -49,10 +48,10 @@ int	check_in_line(t_data *data, char *str, int which)
 		data->pars.no_status++;
 		data->pars.no_line = which;
 	}
-	else if (!ft_strncmp(str + i, PARS_SU, ft_strlen(PARS_SU)))
+	else if (!ft_strncmp(str + i, PARS_SO, ft_strlen(PARS_SO)))
 	{
-		data->pars.su_status++;
-		data->pars.su_line = which;
+		data->pars.so_status++;
+		data->pars.so_line = which;
 	}
 	else if (!ft_strncmp(str + i, PARS_WE, ft_strlen(PARS_WE)))
 	{
@@ -70,7 +69,6 @@ int	check_in_line(t_data *data, char *str, int which)
 		;
 	else
 	{
-		printf ("err %s", str);
 		all_file_free(data);
 		print_exit(ERR ERR_BAD_DATA);
 	}
@@ -93,7 +91,7 @@ void	check_if_data(t_data *data)
 void	check_if_missing_data(t_data *data)
 {
 	if (data->pars.col_c_status == 0 || data->pars.col_f_status == 0
-		|| data->pars.no_status == 0 || data->pars.su_status == 0
+		|| data->pars.no_status == 0 || data->pars.so_status == 0
 		|| data->pars.we_status == 0 || data->pars.ea_status == 0)
 	{
 		all_file_free(data);
@@ -105,7 +103,7 @@ void	check_if_missing_data(t_data *data)
 void	check_if_to_much_data(t_data *data)
 {
 	if (data->pars.col_c_status > 1 || data->pars.col_f_status > 1
-		|| data->pars.no_status > 1 || data->pars.su_status > 1
+		|| data->pars.no_status > 1 || data->pars.so_status > 1
 		|| data->pars.we_status > 1 || data->pars.ea_status > 1)
 	{
 		all_file_free(data);
@@ -114,14 +112,12 @@ void	check_if_to_much_data(t_data *data)
 	return ;
 }
 
-
-
 void	init_pars_data(t_data *data)
 {
 	data->pars.col_c_status = 0;
 	data->pars.col_f_status = 0;
 	data->pars.no_status = 0;
-	data->pars.su_status = 0;
+	data->pars.so_status = 0;
 	data->pars.we_status = 0;
 	data->pars.ea_status = 0;
 	check_if_data(data);
@@ -129,4 +125,10 @@ void	init_pars_data(t_data *data)
 	check_if_to_much_data(data);
 	check_color_c_data(data);
 	check_color_f_data(data);
+	check_no_data(data);
+	check_so_data(data);
+	check_we_data(data);
+	check_ea_data(data);
+
+
 }

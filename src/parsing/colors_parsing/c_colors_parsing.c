@@ -1,4 +1,4 @@
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 int		check_color_c_data_p2(t_data *data, char *str)
 {

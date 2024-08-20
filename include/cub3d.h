@@ -22,14 +22,22 @@
 # define ERR_MISSING_DATA START_RED_PRINTF"Some data is missing in the file\n"FINISH_RED_PRINTF
 # define ERR_TO_MUCH_DATA START_RED_PRINTF"Some data is in double in the file\n"FINISH_RED_PRINTF     /// check la trad
 # define ERR_BAD_DATA START_RED_PRINTF"Bad data in the file\n"FINISH_RED_PRINTF 
+
 # define ERR_COL_C_DATA START_RED_PRINTF"Bad ceiling data in the file\n"FINISH_RED_PRINTF
-# define ERR_COL_F_DATA START_RED_PRINTF"Bad floor data in the file\n"FINISH_RED_PRINTF 
+# define ERR_COL_F_DATA START_RED_PRINTF"Bad floor data in the file\n"FINISH_RED_PRINTF
+
+# define ERR_WALL_NO_DATA START_RED_PRINTF"Bad north wall data in the file\n"FINISH_RED_PRINTF
+# define ERR_WALL_SO_DATA START_RED_PRINTF"Bad south wall data in the file\n"FINISH_RED_PRINTF
+# define ERR_WALL_WE_DATA START_RED_PRINTF"Bad west wall data in the file\n"FINISH_RED_PRINTF
+# define ERR_WALL_EA_DATA START_RED_PRINTF"Bad east wall data in the file\n"FINISH_RED_PRINTF
+
+
 
 
 # define PARS_C "C"
 # define PARS_F "F"
 # define PARS_NO "NO"
-# define PARS_SU "SU"
+# define PARS_SO "SO"
 # define PARS_WE "WE"
 # define PARS_EA "EA"
 
@@ -37,14 +45,14 @@
 typedef struct	s_parsing
 {
 	int no_line;
-	int	su_line;
+	int	so_line;
 	int	we_line;
 	int	ea_line;
 	int	col_c_line;
 	int	col_f_line;
 
 	int no_status;
-	int	su_status;
+	int	so_status;
 	int	we_status;
 	int	ea_status;
 	int	col_c_status;
@@ -60,8 +68,7 @@ typedef struct s_data
 	int		color_f[3];
 	int		color_c[3];
 	char	**map;
-	float	pl_x;
-	float	pl_y;
+	float	pl_position[2];
 	int		fd_map;
 	char	**all_file;
 	t_parsing pars;
@@ -73,19 +80,37 @@ int			main(int ac, char **av);
 void		parsing(int ac, char **av, t_data *data);
 // paring_data
 void	init_pars_data(t_data *data);
+
+
+//colors_pasing
 // c_colors_parsing
 void	check_color_c_data(t_data *data);
 // f_colors_parsing
 void	check_color_f_data(t_data *data);
 
+//walls_parsing
+//wall_parsing
+void	check_ea_data(t_data *data);
+void	check_we_data(t_data *data);
+void	check_so_data(t_data *data);
+void	check_no_data(t_data *data);
+//wall parsing_utils
+void	check_after_word(t_data *data, char *str);
+int		get_len_of_word(char *str);
+
 // utils libft
+char	*ft_substr(char const *s, unsigned int start, size_t len, t_data *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isdigit(int c);
 int		is_white_space(char c);
 size_t	ft_strlen(const char *str);
+
 // utils parsing
 void	copy_all_file(t_data *data, char *map_name);
-void	all_file_free(t_data *data);
 void	print_exit(char *msg);
+
+//free_utils
+void	all_file_free(t_data *data);
+void	free_all(t_data *data, char *msg, int exit_s);
 
 #endif
