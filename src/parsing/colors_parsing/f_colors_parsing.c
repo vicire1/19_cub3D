@@ -7,12 +7,14 @@ int		check_color_f_data_p2(t_data *data, char *str)
 	int	check_v;
 	int	v1;
 	int	v2;
+	int	check_nb;
 
 	i = 0;
 	v1 = 0;
 	v2 = 0;
 	check_n = 0;
 	check_v = 0;
+	check_nb = 0;
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]))
@@ -24,6 +26,8 @@ int		check_color_f_data_p2(t_data *data, char *str)
 			return (1);
 		if (str[i] == ',')
 		{
+			if (str[i + 1] && ft_isdigit(str[i + 1]))
+				check_nb++;
 			if (!v1)
 				v1 = i;
 			else
@@ -37,6 +41,8 @@ int		check_color_f_data_p2(t_data *data, char *str)
 			return (1);
 		i++;
 	}
+	if (check_nb != 2)
+		return (1);
 	data->color_f[0] = atoi(str);
 	data->color_f[1] = atoi(str+v1+1);
 	data->color_f[2] = atoi(str+v2+1);
