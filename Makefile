@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/21 14:30:45 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/08/21 14:39:30 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,19 @@ MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 SRCS =	src/main.c \
 		src/init_mlx.c \
-		src/utils/utils_mlx.c
+		src/utils/utils_mlx.c \
+		src/parsing/parsing.c \
+		src/parsing/parsing_data.c \
+		src/parsing/map_parsing.c \
+		src/parsing/colors_parsing/c_colors_parsing.c \
+		src/parsing/colors_parsing/f_colors_parsing.c \
+		src/parsing/walls_parsing/wall_parsing.c \
+		src/parsing/walls_parsing/wall_parsing_utils.c \
+		src/utils/free_utils.c \
+		src/utils/libft_utils.c \
+		src/utils/parsing_utils.c \
+		src/gnl/get_next_line.c \
+		src/gnl/get_next_line_utils.c \
 
 OBJ_DIR = objets
 
@@ -47,9 +59,9 @@ $(OBJ_DIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME): $(OBJS) $(PRINTF_FLAG)
-	@echo "$(ORANGE)Compiling Minishell...$(CLOSE)"
+	@echo "$(ORANGE)Compiling cub3D...$(CLOSE)"
 	@$(CC) $(OBJS)  -L$(PRINTF_PATH) -lftprintf $(MLXFLAGS) -o $(NAME) $(LIBS)
-	@echo "$(GREEN_BOLD)The Minishell executable is ready.$(CLOSE)"
+	@echo "$(GREEN_BOLD)The cub3D executable is ready.$(CLOSE)"
 
 $(PRINTF_FLAG):
 	@echo "$(ORANGE)Compiling Ft_printf...$(CLOSE)"

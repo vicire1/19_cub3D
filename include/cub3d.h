@@ -8,6 +8,8 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <mlx.h>
+# include "../src/ft_printf_fd/ft_printf.h"
 
 #define START_RED_PRINTF "\033[1;31m"
 #define FINISH_RED_PRINTF "\033[00m"
@@ -56,7 +58,6 @@ typedef struct	s_parsing
 	int	ea_line;
 	int	col_c_line;
 	int	col_f_line;
-
 	int no_status;
 	int	so_status;
 	int	we_status;
@@ -66,8 +67,6 @@ typedef struct	s_parsing
 
 	int longest_map_len;
 }				t_parsing;
-# include <mlx.h>
-# include "../src/ft_printf_fd/ft_printf.h"
 
 typedef struct s_img
 {
@@ -93,6 +92,9 @@ typedef struct s_data
 	int		fd_map;
 	char	**all_file;
 	t_parsing pars;
+    void    *ptr;
+    void    *win;
+    t_img   *img;
 }			t_data;
 
 
@@ -123,14 +125,11 @@ void	check_no_data(t_data *data);
 //wall parsing_utils
 void	check_after_word(t_data *data, char *str);
 int		get_len_of_word(char *str);
-    void    *ptr;
-    void    *win;
-    t_img   *img;
 
 //map_parsing
 void	pars_map(t_data *data);
 
-
+// MLX
 void    create_window(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 

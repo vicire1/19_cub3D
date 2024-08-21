@@ -14,7 +14,6 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-    t_data  data;
     (void)ac;
     (void)av;
 	// parsing
