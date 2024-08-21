@@ -10,7 +10,7 @@ void	check_ea_data(t_data *data)
 	i = 0;
 	while (is_white_space(data->all_file[data->pars.ea_line][i]))
 		i++;
-	i+=2;
+	i += 2;
 	while (is_white_space(data->all_file[data->pars.ea_line][i]))
 		i++;
 	start = i;
@@ -20,7 +20,6 @@ void	check_ea_data(t_data *data)
 	fd_check = open(data->path_E, O_RDONLY);
 	if (fd_check == -1)
 	{
-
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_EA_DATA);
 	}
@@ -37,7 +36,7 @@ void	check_we_data(t_data *data)
 	i = 0;
 	while (is_white_space(data->all_file[data->pars.we_line][i]))
 		i++;
-	i+=2;
+	i += 2;
 	while (is_white_space(data->all_file[data->pars.we_line][i]))
 		i++;
 	start = i;
@@ -47,7 +46,6 @@ void	check_we_data(t_data *data)
 	fd_check = open(data->path_W, O_RDONLY);
 	if (fd_check == -1)
 	{
-
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_WE_DATA);
 	}
@@ -64,7 +62,7 @@ void	check_so_data(t_data *data)
 	i = 0;
 	while (is_white_space(data->all_file[data->pars.so_line][i]))
 		i++;
-	i+=2;
+	i += 2;
 	while (is_white_space(data->all_file[data->pars.so_line][i]))
 		i++;
 	start = i;
@@ -74,7 +72,6 @@ void	check_so_data(t_data *data)
 	fd_check = open(data->path_S, O_RDONLY);
 	if (fd_check == -1)
 	{
-
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_SO_DATA);
 	}
@@ -91,7 +88,7 @@ void	check_no_data(t_data *data)
 	i = 0;
 	while (is_white_space(data->all_file[data->pars.no_line][i]))
 		i++;
-	i+=2;
+	i += 2;
 	while (is_white_space(data->all_file[data->pars.no_line][i]))
 		i++;
 	start = i;
@@ -101,7 +98,6 @@ void	check_no_data(t_data *data)
 	fd_check = open(data->path_N, O_RDONLY);
 	if (fd_check == -1)
 	{
-
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_NO_DATA);
 	}

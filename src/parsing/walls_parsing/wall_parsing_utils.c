@@ -14,10 +14,9 @@ void	check_after_word(t_data *data, char *str)
 		}
 		i++;
 	}
-
 }
 
-int		get_len_of_word(char *str)
+int	get_len_of_word(char *str)
 {
 	int	i;
 

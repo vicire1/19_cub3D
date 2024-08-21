@@ -1,51 +1,46 @@
 #include "../../../include/cub3d.h"
 
-int		check_color_f_data_p2(t_data *data, char *str)
+int	check_color_f_data_p2(t_data *data, char *str)
 {
 	int	i;
-	int	check_n;
-	int	check_v;
-	int	v1;
-	int	v2;
-	int	check_nb;
 
 	i = 0;
-	v1 = 0;
-	v2 = 0;
-	check_n = 0;
-	check_v = 0;
-	check_nb = 0;
+	data->pars.v1 = 0;
+	data->pars.v2 = 0;
+	data->pars.check_n = 0;
+	data->pars.check_v = 0;
+	data->pars.check_nb = 0;
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]))
 		{
-			check_v = 0;
-			check_n++;
+			data->pars.check_v = 0;
+			data->pars.check_n++;
 		}
-		if (check_n > 3)
+		if (data->pars.check_n > 3)
 			return (1);
 		if (str[i] == ',')
 		{
 			if (str[i + 1] && ft_isdigit(str[i + 1]))
-				check_nb++;
-			if (!v1)
-				v1 = i;
+				data->pars.check_nb++;
+			if (!data->pars.v1)
+				data->pars.v1 = i;
 			else
-				v2 = i;
-			check_n = 0;
-			check_v++;
+				data->pars.v2 = i;
+			data->pars.check_n = 0;
+			data->pars.check_v++;
 		}
-		if (check_v > 1)
+		if (data->pars.check_v > 1)
 			return (1);
 		if (!ft_isdigit(str[i]) && str[i] != ',' && !is_white_space(str[i]) && str[i] != '\n')
 			return (1);
 		i++;
 	}
-	if (check_nb != 2)
+	if (data->pars.check_nb != 2)
 		return (1);
 	data->color_f[0] = atoi(str);
-	data->color_f[1] = atoi(str+v1+1);
-	data->color_f[2] = atoi(str+v2+1);
+	data->color_f[1] = atoi(str+data->pars.v1+1);
+	data->color_f[2] = atoi(str+data->pars.v2+1);
 	if (data->color_f[0] < 0 || data->color_f[0] > 255 || data->color_f[1] < 0 || data->color_f[1] > 255 || data->color_f[2] < 0 || data->color_f[2] > 255)
 		return (1);
 	return (0);

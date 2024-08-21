@@ -129,6 +129,4 @@ void	init_pars_data(t_data *data)
 	check_so_data(data);
 	check_we_data(data);
 	check_ea_data(data);
-
-
 }

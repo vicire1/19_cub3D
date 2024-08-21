@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-void	check_if_empty_line(t_data *data, int	i)
+void	check_if_empty_line(t_data *data, int i)
 {
 	int	j;
 
@@ -9,7 +9,8 @@ void	check_if_empty_line(t_data *data, int	i)
 		j = 0;
 		while (data->all_file[i][j])
 		{
-			if (!is_white_space(data->all_file[i][j]) && data->all_file[i][j] != '\n')
+			if (!is_white_space(data->all_file[i][j])
+			&& data->all_file[i][j] != '\n')
 			{
 				printf("ICI\n");
 				free_all(data, NULL, 0);
@@ -21,7 +22,7 @@ void	check_if_empty_line(t_data *data, int	i)
 	}
 }
 
-int		check_if_map_line(char *str)
+int	check_if_map_line(char *str)
 {
 	int	i;
 
@@ -39,7 +40,7 @@ int		check_if_map_line(char *str)
 	return (0);
 }
 
-int		nb_line_map(t_data *data)
+int	nb_line_map(t_data *data)
 {
 	int	i;
 	int	ret;
@@ -74,7 +75,8 @@ void	recup_map(t_data *data)
 	nb_line += i;
 	while (i < nb_line)
 	{
-		data->map[j] = ft_substr(data->all_file[i], 0, ft_strlen_before_n_line(data->all_file[i]), data);
+		data->map[j] = ft_substr(data->all_file[i], 0,
+				ft_strlen_before_n_line(data->all_file[i]), data);
 		j++;
 		i++;
 	}
@@ -84,7 +86,8 @@ void	recup_map(t_data *data)
 
 int	map_char(char c)
 {
-	if (c != ' ' && c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '\n')
+	if (c != ' ' && c != '1' && c != '0' && c != 'N'
+		&& c != 'S' && c != 'W' && c != 'E' && c != '\n')
 		return (0);
 	return (1);
 }
@@ -131,11 +134,11 @@ void	recover_longest_map_line(t_data *data)
 
 void	fill_space_map(t_data *data)
 {
-	int	len_line;
-	int	i;
-	int	tab_size;
-	char *tmp;
-	char *tmp2;
+	int		len_line;
+	int		i;
+	int		tab_size;
+	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	tab_size = recover_tab_size(data->map);
@@ -147,7 +150,7 @@ void	fill_space_map(t_data *data)
 		tmp2 = mall_space_line(data->pars.longest_map_len - len_line, data);
 		if (tmp2)
 			data->map[i] = ft_strjoin(tmp, tmp2, data);
-		else 
+		else
 			data->map[i] = ft_strdup(tmp, data);
 		free(tmp2);
 		tmp2 = NULL;
@@ -225,7 +228,8 @@ void	recover_player_start_pos(t_data *data)
 
 void	check_map_is_closed(t_data *data, int x, int y)
 {
-	if (x < 0 || y < 0 || !data->map[x][y] || data->map[x][y] == '1' || data->map[x][y] == '2')
+	if (x < 0 || y < 0 || !data->map[x][y]
+	|| data->map[x][y] == '1' || data->map[x][y] == '2')
 		return ;
 	if (data->map[x][y] == ' ')
 	{
@@ -234,13 +238,12 @@ void	check_map_is_closed(t_data *data, int x, int y)
 	data->map[x][y] = '2';
 	check_map_is_closed(data, x - 1, y);
 	check_map_is_closed(data, x + 1, y);
-	check_map_is_closed(data, x , y - 1);
-	check_map_is_closed(data, x , y + 1);
+	check_map_is_closed(data, x, y - 1);
+	check_map_is_closed(data, x, y + 1);
 }
 
-void	reset_player_pos(t_data *data)
+void	reset_player_pos(t_data *data, int i)
 {
-	int	i;
 	int	j;
 
 	i = 0;
@@ -249,7 +252,8 @@ void	reset_player_pos(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (i == (int)data->pl_position[0] && j == (int)data->pl_position[1])
+			if (i == (int)data->pl_position[0]
+				&& j == (int)data->pl_position[1])
 			{
 				if (data->pl_direction == 0)
 					data->map[i][j] = 'N';
@@ -277,6 +281,6 @@ void	pars_map(t_data *data)
 	recover_player_start_pos(data);
 	printf("PLAYER POSITION %f %f\n", data->pl_position[0], data->pl_position[1]);
 	check_map_is_closed(data, (int)data->pl_position[0], (int)data->pl_position[1]);
-	reset_player_pos(data);
+	reset_player_pos(data, 0);
 	print_tab(data->map);
 }

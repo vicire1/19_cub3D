@@ -65,6 +65,12 @@ typedef struct	s_parsing
 	int	col_c_status;
 	int	col_f_status;
 
+	int	check_n;
+	int	check_v;
+	int	v1;
+	int	v2;
+	int	check_nb;
+
 	int longest_map_len;
 }				t_parsing;
 
