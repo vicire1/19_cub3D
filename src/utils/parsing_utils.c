@@ -53,6 +53,36 @@ int	ft_strlen_before_n_line(char *str)
 	return (i);
 }
 
+int	recover_tab_size(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+char	*mall_space_line(int len, t_data *data)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	if (len <= 0)
+		return (NULL);
+	ret = malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		free_all(data, ERR_MALLOC, 1);
+	while (i < len)
+	{
+		ret[i] = ' ';
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
 void	print_exit(char *msg)
 {
 	printf("%s", msg);

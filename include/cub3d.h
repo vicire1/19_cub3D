@@ -34,6 +34,9 @@
 # define ERR_DATA_AFTER_MAP START_RED_PRINTF"There is some data after the map in the file\n"FINISH_RED_PRINTF
 # define ERR_MAP_DATA START_RED_PRINTF"There is some incorect data for the map in the file\n"FINISH_RED_PRINTF
 
+# define ERR_PLAYER_CNTR START_RED_PRINTF"There is more than one player in this map\n"FINISH_RED_PRINTF
+# define ERR_MAP_NOT_CLOSED START_RED_PRINTF"The map is not closed\n"FINISH_RED_PRINTF
+# define ERR_PLAYER_LESS_CNTR START_RED_PRINTF"There is less than one player in this map\n"FINISH_RED_PRINTF
 
 
 
@@ -74,6 +77,8 @@ typedef struct s_data
 	int		color_c[3];
 	char	**map;
 	float	pl_position[2];
+	int		pl_direction;
+	//0 NORD | 1 SOUTH | 2 WEST | 3 EAST
 	int		fd_map;
 	char	**all_file;
 	t_parsing pars;
@@ -113,15 +118,20 @@ void	pars_map(t_data *data);
 
 
 // utils libft
+char	*ft_strdup(const char *s, t_data *data);
 char	*ft_substr(char const *s, unsigned int start, size_t len, t_data *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isdigit(int c);
 int		is_white_space(char c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strjoin(char const *s1, char const *s2, t_data *data);
 size_t	ft_strlen(const char *str);
 
 // utils parsing
 void	copy_all_file(t_data *data, char *map_name);
 int	ft_strlen_before_n_line(char *str);
+int	recover_tab_size(char **tab);
+char	*mall_space_line(int len, t_data *data);
 void	print_exit(char *msg);
 
 //free_utils

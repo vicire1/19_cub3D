@@ -3,10 +3,11 @@
 void	check_if_empty_line(t_data *data, int	i)
 {
 	int	j;
+
 	while (data->all_file[i])
 	{
 		j = 0;
-		while(data->all_file[i][j])
+		while (data->all_file[i][j])
 		{
 			if (!is_white_space(data->all_file[i][j]) && data->all_file[i][j] != '\n')
 			{
@@ -45,9 +46,9 @@ int		nb_line_map(t_data *data)
 
 	i = 0;
 	ret = 0;
-	while(!check_if_map_line(data->all_file[i]))
+	while (!check_if_map_line(data->all_file[i]))
 		i++;
-	while(check_if_map_line(data->all_file[i]))
+	while (check_if_map_line(data->all_file[i]))
 	{
 		ret++;
 		i++;
@@ -98,7 +99,7 @@ void	check_map_data(t_data *data)
 	while (data->map[x])
 	{
 		y = 0;
-		while(data->map[x][y])
+		while (data->map[x][y])
 		{
 			if (!map_char(data->map[x][y]))
 				free_all(data, ERR ERR_MAP_DATA, 1);
@@ -118,7 +119,7 @@ void	recover_longest_map_line(t_data *data)
 	x = 0;
 	y = 0;
 	data->pars.longest_map_len = 0;
-	while(data->map[x])
+	while (data->map[x])
 	{
 		tmp_len = ft_strlen_before_n_line(data->map[x]);
 		if (data->pars.longest_map_len < tmp_len)
@@ -128,15 +129,154 @@ void	recover_longest_map_line(t_data *data)
 	return ;
 }
 
+void	fill_space_map(t_data *data)
+{
+	int	len_line;
+	int	i;
+	int	tab_size;
+	char *tmp;
+	char *tmp2;
+
+	i = 0;
+	tab_size = recover_tab_size(data->map);
+	while (i < tab_size)
+	{
+		tmp = ft_strdup(data->map[i], data);
+		len_line = ft_strlen_before_n_line(data->map[i]);
+		free(data->map[i]);
+		tmp2 = mall_space_line(data->pars.longest_map_len - len_line, data);
+		if (tmp2)
+			data->map[i] = ft_strjoin(tmp, tmp2, data);
+		else 
+			data->map[i] = ft_strdup(tmp, data);
+		free(tmp2);
+		tmp2 = NULL;
+		free(tmp);
+		tmp = NULL;
+		i++;
+	}
+	return ;
+}
+
+void	check_player_is_correct(t_data *data)
+{
+	int	i;
+	int	j;
+	int	check;
+
+	i = 0;
+	check = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
+				check++;
+			if (check > 1)
+				free_all(data, ERR ERR_PLAYER_CNTR, 1);
+			j++;
+		}
+		i++;
+	}
+	if (check < 1)
+		free_all(data, ERR ERR_PLAYER_LESS_CNTR, 1);
+	return ;
+}
+
+void	recover_player_start_dir(t_data *data, char c)
+{
+	if (c == 'N')
+		data->pl_direction = 0;
+	if (c == 'S')
+		data->pl_direction = 1;
+	if (c == 'W')
+		data->pl_direction = 2;
+	if (c == 'E')
+		data->pl_direction = 3;
+}
+
+void	recover_player_start_pos(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
+			{
+				data->pl_position[0] = i;
+				data->pl_position[1] = j;
+				recover_player_start_dir(data, data->map[i][j]);
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+	return ;
+}
+
+void	check_map_is_closed(t_data *data, int x, int y)
+{
+	if (x < 0 || y < 0 || !data->map[x][y] || data->map[x][y] == '1' || data->map[x][y] == '2')
+		return ;
+	if (data->map[x][y] == ' ')
+	{
+		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
+	}
+	data->map[x][y] = '2';
+	check_map_is_closed(data, x - 1, y);
+	check_map_is_closed(data, x + 1, y);
+	check_map_is_closed(data, x , y - 1);
+	check_map_is_closed(data, x , y + 1);
+}
+
+void	reset_player_pos(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (i == (int)data->pl_position[0] && j == (int)data->pl_position[1])
+			{
+				if (data->pl_direction == 0)
+					data->map[i][j] = 'N';
+				else if (data->pl_direction == 1)
+					data->map[i][j] = 'S';
+				else if (data->pl_direction == 2)
+					data->map[i][j] = 'W';
+				else if (data->pl_direction == 3)
+					data->map[i][j] = 'E';
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	pars_map(t_data *data)
 {
 	recup_map(data);
 	check_map_data(data);
-	//fctn qui va delete le /n si il y en a un a la fin de la line
 	recover_longest_map_line(data);
-	//fctn qui va join (longest_len - len) d'espace à la line
-	
-	//fctn backtraking like so_long qui va replace les 0 sur les 4 dir autours du player et si c'est un space, tchaooo 
-	//fctn verif qui va compter le nb de player 
+	fill_space_map(data);
+	check_player_is_correct(data);
+	recover_player_start_pos(data);
+	printf("PLAYER POSITION %f %f\n", data->pl_position[0], data->pl_position[1]);
+	check_map_is_closed(data, (int)data->pl_position[0], (int)data->pl_position[1]);
+	reset_player_pos(data);
 	print_tab(data->map);
 }
