@@ -12,14 +12,16 @@ void	init_null(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data	*data;
 
     (void)ac;
     (void)av;
 	// parsing
-	init_null(&data);
-	parsing(ac, av, &data);
-	printf("Go");
-    create_window(&data);
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (1);
+	init_null(data);
+	parsing(ac, av, data);
+    create_window(data);
 	return (0);
 }

@@ -40,7 +40,16 @@
 # define ERR_MAP_NOT_CLOSED START_RED_PRINTF"The map is not closed\n"FINISH_RED_PRINTF
 # define ERR_PLAYER_LESS_CNTR START_RED_PRINTF"There is less than one player in this map\n"FINISH_RED_PRINTF
 
+# define FOV 0.8
+# define SCREEN_W 1024
+# define SCREEN_H 512
 
+# define A 0
+# define W 13
+# define S 1
+# define D 2
+# define L_ARR 123
+# define R_ARR 124
 
 # define PARS_C "C"
 # define PARS_F "F"
@@ -77,6 +86,41 @@ typedef struct s_img
 	int		endian;
 }      t_img;
 
+typedef struct	s_rc
+{
+	double	pl_pos[2];     //position du player
+	double	pl_dir[2];	// direction du player (-1, 0, 1) en x ou y
+	double	plane[2];	// l'angle de vue
+	double	time;
+	double	oldtime;
+	double	cam_x;
+	double	ray_dirX;  //rayon de vue
+	double	ray_dirY;
+	double	side_distX;		//distance entre jour et prochain croisement avec x ou y
+	double	side_distY;
+	double	delta_distX;	// distance entre un x et un autre x
+	double	delta_distY;
+	int		mapX;			// int de la position qui va permettre d'aller voir plus loin
+	int		mapY;
+	int		stepX;			// direction
+	int		stepY;
+	int		hit;		// flag pour avoir si on a rencontre un mur
+	int		side;		// savoir si on touche en NS ou WE
+	double	ray_len;	// longueur du rayon de vue avant qu'il touche
+	int		line_h;
+	int		line_start;
+	int		line_end;
+	double	frame_time;
+	double	move_speed;
+	double	rot_speed;
+	int		move_f;
+	int		move_b;
+	int		move_l;
+	int		move_r;
+	int		rot_l;
+	int		rot_r;
+}	t_rc;
+
 typedef struct s_data
 {
 	char	*path_N;
@@ -86,15 +130,13 @@ typedef struct s_data
 	int		color_f[3];
 	int		color_c[3];
 	char	**map;
-	float	pl_position[2];
-	int		pl_direction;
-	//0 NORD | 1 SOUTH | 2 WEST | 3 EAST
 	int		fd_map;
 	char	**all_file;
 	t_parsing pars;
     void    *ptr;
     void    *win;
     t_img   *img;
+	t_rc	*rc;
 }			t_data;
 
 
@@ -132,6 +174,12 @@ void	pars_map(t_data *data);
 // MLX
 void    create_window(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+// raycasting
+void	raycasting_loop(t_data *data);
+int    	key_press(int keysym, t_data *data);
+int    	key_release(int keysym, t_data *data);
+int 	move(t_data *data);
 
 // utils libft
 char	*ft_strdup(const char *s, t_data *data);

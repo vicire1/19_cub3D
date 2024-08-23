@@ -120,6 +120,20 @@ void	init_pars_data(t_data *data)
 	data->pars.so_status = 0;
 	data->pars.we_status = 0;
 	data->pars.ea_status = 0;
+	data->rc = malloc(sizeof(t_rc));
+	if (!data->rc)
+		return ;
+	data->rc->pl_dir[0] = 0;
+	data->rc->pl_dir[1] = 0;
+	data->rc->plane[0] = 0;
+	data->rc->plane[1] = 0;
+	data->rc->move_b = 0;
+	data->rc->move_f = 0;
+	data->rc->move_l = 0;
+	data->rc->move_r = 0;
+	data->rc->rot_l = 0;
+	data->rc->rot_r = 0;
+	data->rc->time = 0;
 	check_if_data(data);
 	check_if_missing_data(data);
 	check_if_to_much_data(data);
@@ -129,6 +143,4 @@ void	init_pars_data(t_data *data)
 	check_so_data(data);
 	check_we_data(data);
 	check_ea_data(data);
-
-
 }

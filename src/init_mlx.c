@@ -1,33 +1,18 @@
 #include "../include/cub3d.h"
 
-void    put_mini_map(t_data *data)
+void	create_window(t_data *data)
 {
-    int x;
-    int y;
-
-    x = 804;
-    y = 19;
-    while (++y <= 120)
-    {
-        while (++x <= 1004)
-            my_mlx_pixel_put(data->img, x, y, 0x00A0A0A0);
-        x = 804;
-    }
-}
-
-void    create_window(t_data *data)
-{
-    data->ptr = mlx_init();
-    data->win = mlx_new_window(data->ptr, 1024, 512, "Cub3D");
-    data->img = malloc(sizeof(t_img));
-    if (!data->img)
-    {
-        ft_printf_fd(2, "Error malloc\n");
-        exit (1);
-    }
-    data->img->img = mlx_new_image(data->ptr, 1024, 512);
-    data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, &data->img->line_length, &data->img->endian);
-	put_mini_map(data);
-	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
+	data->ptr = mlx_init();
+	data->win = mlx_new_window(data->ptr, SCREEN_W, SCREEN_H, "Cub3D");
+	data->img = malloc(sizeof(t_img));
+	if (!data->img)
+	{
+		ft_printf_fd(2, "Error malloc\n");
+		exit(1);
+	}
+	raycasting_loop(data);
+	mlx_hook(data->win, 2, 1L<<0, &key_press, data);
+	mlx_hook(data->win, 3, 1L<<1, &key_release, data);
+	mlx_loop_hook(data->ptr, &move, data);
 	mlx_loop(data->ptr);
 }

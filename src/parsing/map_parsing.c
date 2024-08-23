@@ -188,50 +188,62 @@ void	check_player_is_correct(t_data *data)
 void	recover_player_start_dir(t_data *data, char c)
 {
 	if (c == 'N')
-		data->pl_direction = 0;
+	{
+		data->rc->pl_dir[0] = -1;
+		data->rc->plane[1] = FOV;
+	}
 	if (c == 'S')
-		data->pl_direction = 1;
+	{
+		data->rc->pl_dir[0] = 1;
+		data->rc->plane[1] = -FOV;
+	}
 	if (c == 'W')
-		data->pl_direction = 2;
+	{
+		data->rc->pl_dir[1] = -1;
+		data->rc->plane[0] = -FOV;
+	}
 	if (c == 'E')
-		data->pl_direction = 3;
+	{
+		data->rc->pl_dir[1] = 1;
+		data->rc->plane[0] = FOV;
+	}
 }
 
 void	recover_player_start_pos(t_data *data)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 0;
-	while (data->map[i])
+	y = 0;
+	while (data->map[y])
 	{
-		j = 0;
-		while (data->map[i][j])
+		x = 0;
+		while (data->map[y][x])
 		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
+			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
+				|| data->map[y][x] == 'W' || data->map[y][x] == 'E')
 			{
-				data->pl_position[0] = i;
-				data->pl_position[1] = j;
-				recover_player_start_dir(data, data->map[i][j]);
+				data->rc->pl_pos[0] = y + 0.5;
+				data->rc->pl_pos[1] = x + 0.5;
+				recover_player_start_dir(data, data->map[y][x]);
 				return ;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	return ;
 }
 
 void	check_map_is_closed(t_data *data, int x, int y)
 {
-	if (x < 0 || y < 0 || !data->map[x][y] || data->map[x][y] == '1' || data->map[x][y] == '2')
+	if (x < 0 || y < 0 || !data->map[y][x] || data->map[y][x] == '1' || data->map[y][x] == 'O')
 		return ;
-	if (data->map[x][y] == ' ')
+	if (data->map[y][x] == ' ')
 	{
 		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
 	}
-	data->map[x][y] = '2';
+	data->map[y][x] = 'O';
 	check_map_is_closed(data, x - 1, y);
 	check_map_is_closed(data, x + 1, y);
 	check_map_is_closed(data, x , y - 1);
@@ -240,30 +252,30 @@ void	check_map_is_closed(t_data *data, int x, int y)
 
 void	reset_player_pos(t_data *data)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 0;
-	while (data->map[i])
+	y = 0;
+	while (data->map[y])
 	{
-		j = 0;
-		while (data->map[i][j])
+		x = 0;
+		while (data->map[y][x])
 		{
-			if (i == (int)data->pl_position[0] && j == (int)data->pl_position[1])
+			if (x == (int)data->rc->pl_pos[1] && y == (int)data->rc->pl_pos[0])
 			{
-				if (data->pl_direction == 0)
-					data->map[i][j] = 'N';
-				else if (data->pl_direction == 1)
-					data->map[i][j] = 'S';
-				else if (data->pl_direction == 2)
-					data->map[i][j] = 'W';
-				else if (data->pl_direction == 3)
-					data->map[i][j] = 'E';
+				if (data->rc->pl_dir[0] == -1 && data->rc->pl_dir[1] == 0)
+					data->map[y][x] = 'N';
+				else if (data->rc->pl_dir[0] == 1 && data->rc->pl_dir[1] == 0)
+					data->map[y][x] = 'S';
+				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == -1)
+					data->map[y][x] = 'W';
+				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == 1)
+					data->map[y][x] = 'E';
 				return ;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
@@ -275,8 +287,7 @@ void	pars_map(t_data *data)
 	fill_space_map(data);
 	check_player_is_correct(data);
 	recover_player_start_pos(data);
-	printf("PLAYER POSITION %f %f\n", data->pl_position[0], data->pl_position[1]);
-	check_map_is_closed(data, (int)data->pl_position[0], (int)data->pl_position[1]);
+	check_map_is_closed(data, (int)data->rc->pl_pos[1], (int)data->rc->pl_pos[0]);
 	reset_player_pos(data);
 	print_tab(data->map);
 }
