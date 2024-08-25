@@ -1,0 +1,7 @@
+segfault quand pas de map ---> corrigé mais pas sur
+
+parsing fonctionne pas si j'ai des 1 ou 0 dans mes textures
+
+pour color_c et color_f j'ai besoin d'un int et pas de 3 :
+pour l'instant color[0] = R    color[1] = G    color[2] = B
+===> il me faut     int color = 0xTTRRGGBB

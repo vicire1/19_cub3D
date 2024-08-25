@@ -46,7 +46,7 @@ int		nb_line_map(t_data *data)
 
 	i = 0;
 	ret = 0;
-	while (!check_if_map_line(data->all_file[i]))
+	while (data->all_file[i] &&!check_if_map_line(data->all_file[i]))
 		i++;
 	while (check_if_map_line(data->all_file[i]))
 	{
@@ -250,34 +250,34 @@ void	check_map_is_closed(t_data *data, int x, int y)
 	check_map_is_closed(data, x , y + 1);
 }
 
-void	reset_player_pos(t_data *data)
-{
-	int	y;
-	int	x;
+// void	reset_player_pos(t_data *data)
+// {
+// 	int	y;
+// 	int	x;
 
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (x == (int)data->rc->pl_pos[1] && y == (int)data->rc->pl_pos[0])
-			{
-				if (data->rc->pl_dir[0] == -1 && data->rc->pl_dir[1] == 0)
-					data->map[y][x] = 'N';
-				else if (data->rc->pl_dir[0] == 1 && data->rc->pl_dir[1] == 0)
-					data->map[y][x] = 'S';
-				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == -1)
-					data->map[y][x] = 'W';
-				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == 1)
-					data->map[y][x] = 'E';
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
+// 	y = 0;
+// 	while (data->map[y])
+// 	{
+// 		x = 0;
+// 		while (data->map[y][x])
+// 		{
+// 			if (x == (int)data->rc->pl_pos[1] && y == (int)data->rc->pl_pos[0])
+// 			{
+// 				if (data->rc->pl_dir[0] == -1 && data->rc->pl_dir[1] == 0)
+// 					data->map[y][x] = 'N';
+// 				else if (data->rc->pl_dir[0] == 1 && data->rc->pl_dir[1] == 0)
+// 					data->map[y][x] = 'S';
+// 				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == -1)
+// 					data->map[y][x] = 'W';
+// 				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == 1)
+// 					data->map[y][x] = 'E';
+// 				return ;
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 void	pars_map(t_data *data)
 {
@@ -288,6 +288,6 @@ void	pars_map(t_data *data)
 	check_player_is_correct(data);
 	recover_player_start_pos(data);
 	check_map_is_closed(data, (int)data->rc->pl_pos[1], (int)data->rc->pl_pos[0]);
-	reset_player_pos(data);
+	// reset_player_pos(data);
 	print_tab(data->map);
 }

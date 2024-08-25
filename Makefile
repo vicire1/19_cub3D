@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/23 14:48:02 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/08/25 18:53:58 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = cc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror -Imlx -finline-functions -fvectorize -fslp-vectorize -ffast-math -falign-functions -funroll-loops -fstrict-aliasing -fomit-frame-pointer -flto -Ofast -O1 -O2 -Os -O3
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 

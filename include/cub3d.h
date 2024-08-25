@@ -41,8 +41,9 @@
 # define ERR_PLAYER_LESS_CNTR START_RED_PRINTF"There is less than one player in this map\n"FINISH_RED_PRINTF
 
 # define FOV 0.8
-# define SCREEN_W 1024
-# define SCREEN_H 512
+# define SCREEN_W 1280
+# define SCREEN_H 720
+# define TEX_SIZE 64
 
 # define A 0
 # define W 13
@@ -57,6 +58,11 @@
 # define PARS_SO "SO"
 # define PARS_WE "WE"
 # define PARS_EA "EA"
+
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
 
 typedef struct	s_parsing
@@ -119,6 +125,7 @@ typedef struct	s_rc
 	int		move_r;
 	int		rot_l;
 	int		rot_r;
+	int		buffer[SCREEN_H][SCREEN_W];
 }	t_rc;
 
 typedef struct s_data
@@ -127,6 +134,7 @@ typedef struct s_data
 	char	*path_S;
 	char	*path_W;
 	char	*path_E;
+	t_img	txtr[4];
 	int		color_f[3];
 	int		color_c[3];
 	char	**map;
@@ -177,8 +185,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 // raycasting
 void	raycasting_loop(t_data *data);
-int    	key_press(int keysym, t_data *data);
-int    	key_release(int keysym, t_data *data);
 int 	move(t_data *data);
 
 // utils libft
