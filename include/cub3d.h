@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <mlx.h>
+# include "../src/mlx/mlx.h"
 # include "../src/ft_printf_fd/ft_printf.h"
 
 #define START_RED_PRINTF "\033[1;31m"
@@ -125,6 +125,11 @@ typedef struct	s_rc
 	int		move_r;
 	int		rot_l;
 	int		rot_r;
+	double	wall_x;    // ou le mur a ete touche exactement
+	int		tex_x;
+	int		tex_y;
+	double	tex_pos;
+	double	step;
 	int		buffer[SCREEN_H][SCREEN_W];
 }	t_rc;
 

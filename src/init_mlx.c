@@ -46,16 +46,16 @@ void	load_xpm(t_data *data)
 	if (!data->txtr[NO].img || !data->txtr[SO].img || !data->txtr[WE].img
 		|| !data->txtr[EA].img)
 		exit(1);
-	data->txtr[NO].addr = mlx_get_data_addr(data->ptr,
+	data->txtr[NO].addr = mlx_get_data_addr(data->txtr[NO].img,
 			&data->txtr[NO].bits_per_pixel, &data->txtr[NO].line_length,
 			&data->txtr[NO].endian);
-	data->txtr[SO].addr = mlx_get_data_addr(data->ptr,
+	data->txtr[SO].addr = mlx_get_data_addr(data->txtr[SO].img,
 			&data->txtr[SO].bits_per_pixel, &data->txtr[SO].line_length,
 			&data->txtr[SO].endian);
-	data->txtr[WE].addr = mlx_get_data_addr(data->ptr,
+	data->txtr[WE].addr = mlx_get_data_addr(data->txtr[WE].img,
 			&data->txtr[WE].bits_per_pixel, &data->txtr[WE].line_length,
 			&data->txtr[WE].endian);
-	data->txtr[EA].addr = mlx_get_data_addr(data->ptr,
+	data->txtr[EA].addr = mlx_get_data_addr(data->txtr[EA].img,
 			&data->txtr[EA].bits_per_pixel, &data->txtr[EA].line_length,
 			&data->txtr[EA].endian);
 }

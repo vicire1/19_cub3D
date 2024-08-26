@@ -114,10 +114,8 @@ void	recover_longest_map_line(t_data *data)
 {
 	int	tmp_len;
 	int	x;
-	int	y;
 
 	x = 0;
-	y = 0;
 	data->pars.longest_map_len = 0;
 	while (data->map[x])
 	{

@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/25 18:53:58 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/08/26 21:16:52 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,11 @@ CC = cc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -Imlx -finline-functions -fvectorize -fslp-vectorize -ffast-math -falign-functions -funroll-loops -fstrict-aliasing -fomit-frame-pointer -flto -Ofast -O1 -O2 -Os -O3
-
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror
+FLAGS_OPTI = -finline-functions -fvectorize -fslp-vectorize -ffast-math -falign-functions -funroll-loops -fstrict-aliasing -fomit-frame-pointer -flto -Ofast -O1 -O2 -Os -O3
+FLAGS_X86	= -Wall -Wextra -Werror -O3 -march=native
+FLAGS_ARM	= -Wall -Wextra -Werror -O3 -arch arm64
+MLXFLAGS = -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
 
 SRCS =	src/main.c \
 		src/init_mlx.c \
@@ -48,6 +50,12 @@ OBJ_DIR = objets
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
+MLX = libmlx.a
+
+MLX_PATH = ./src/mlx
+
+MLX_FLAG = $(MLX_PATH)/.libcompiled
+
 PRINTF = libftprintf.a
 
 PRINTF_PATH = ./src/ft_printf_fd
@@ -56,14 +64,23 @@ PRINTF_FLAG = $(PRINTF_PATH)/.libcompiled
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(FLAGS_OPTI) -c $< -o $@
 
-all: $(NAME)
+all: architecture $(NAME)
 
-$(NAME): $(OBJS) $(PRINTF_FLAG)
+architecture:
+	@uname -m | grep -q 'arm' && FLAGS="$(FLAGS_ARM)" || FLAGS="$(FLAGS_X86)"
+
+$(NAME): $(OBJS) $(PRINTF_FLAG) $(MLX_FLAG)
 	@echo "$(ORANGE)Compiling cub3D...$(CLOSE)"
 	@$(CC) $(OBJS)  -L$(PRINTF_PATH) -lftprintf $(MLXFLAGS) -o $(NAME) $(LIBS)
 	@echo "$(GREEN_BOLD)The cub3D executable is ready.$(CLOSE)"
+
+$(MLX_FLAG):
+	@echo "$(ORANGE)Compiling MLX...$(CLOSE)"
+	@make -s -C $(MLX_PATH)
+	@echo "$(GREEN)MLX ready.$(CLOSE)"
+	@touch $(MLX_FLAG)
 
 $(PRINTF_FLAG):
 	@echo "$(ORANGE)Compiling Ft_printf...$(CLOSE)"
@@ -73,12 +90,14 @@ $(PRINTF_FLAG):
 
 clean:
 	@$(MAKE) clean -s -C $(PRINTF_PATH)
+	@$(MAKE) clean -s -C $(MLX_PATH)
 	@$(RM) $(OBJ_DIR)
 	@echo "$(YELLOW)Objects correctly deleted.$(CLOSE)"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(PRINTF_PATH)/$(PRINTF) $(PRINTF_FLAG)
+	@$(RM) $(MLX_PATH)/$(MLX) $(MLX_FLAG)
 	@echo "$(YELLOW)Executable file(s) correctly deleted.$(CLOSE)"
 
 re: fclean all
