@@ -1,51 +1,5 @@
 #include "../include/cub3d.h"
 
-int	key_press(int keysym, t_data *data)
-{
-	if (keysym == W)
-		data->rc->move_f = 1;
-	if (keysym == S)
-		data->rc->move_b = 1;
-	if (keysym == L_ARR)
-		data->rc->rot_l = 1;
-	if (keysym == R_ARR)
-		data->rc->rot_r = 1;
-	if (keysym == A)
-		data->rc->move_l = 1;
-	if (keysym == D)
-		data->rc->move_r = 1;
-	if (keysym == ESC)
-	{
-		free_all(data, NULL, 0);
-		exit(0);
-	}
-	return (0);
-}
-
-int	key_release(int keysym, t_data *data)
-{
-	if (keysym == W)
-		data->rc->move_f = 0;
-	if (keysym == S)
-		data->rc->move_b = 0;
-	if (keysym == L_ARR)
-		data->rc->rot_l = 0;
-	if (keysym == R_ARR)
-		data->rc->rot_r = 0;
-	if (keysym == A)
-		data->rc->move_l = 0;
-	if (keysym == D)
-		data->rc->move_r = 0;
-	return (0);
-}
-
-int	cross_escape(t_data *data)
-{
-	free_all(data, NULL, 0);
-	exit(0);
-	return (0);
-}
-
 void	load_xpm(t_data *data)
 {
 	int	w;
@@ -72,6 +26,24 @@ void	load_xpm(t_data *data)
 			&data->txtr[EA].endian);
 }
 
+void	init_rc_struct(t_data *data)
+{
+	data->rc = malloc(sizeof(t_rc));
+	if (!data->rc)
+		free_all(data, ERR ERR_MALLOC, 1);
+	data->rc->pl_dir[0] = 0;
+	data->rc->pl_dir[1] = 0;
+	data->rc->plane[0] = 0;
+	data->rc->plane[1] = 0;
+	data->rc->move_b = 0;
+	data->rc->move_f = 0;
+	data->rc->move_l = 0;
+	data->rc->move_r = 0;
+	data->rc->rot_l = 0;
+	data->rc->rot_r = 0;
+	data->rc->time = 0;
+}
+
 void	create_window(t_data *data)
 {
 	data->ptr = mlx_init();
@@ -79,6 +51,7 @@ void	create_window(t_data *data)
 	data->img = malloc(sizeof(t_img));
 	if (!data->img)
 		free_all(data, ERR ERR_MALLOC, 1);
+	data->img->img = NULL;
 	load_xpm(data);
 	raycasting_loop(data);
 	mlx_hook(data->win, 2, 1L << 0, &key_press, data);

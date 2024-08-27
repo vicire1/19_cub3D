@@ -80,7 +80,6 @@ typedef struct	s_parsing
 	int	ea_status;
 	int	col_c_status;
 	int	col_f_status;
-
 	int longest_map_len;
 }				t_parsing;
 
@@ -185,6 +184,11 @@ void	pars_map(t_data *data);
 void    create_window(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_lines(t_data *data, int i);
+int	cross_escape(t_data *data);
+int	key_release(int keysym, t_data *data);
+int	key_press(int keysym, t_data *data);
+void	init_rc_struct(t_data *data);
+
 
 // raycasting
 void	raycasting_loop(t_data *data);

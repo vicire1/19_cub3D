@@ -64,12 +64,12 @@ void	check_color_c_data(t_data *data)
 		i++;
 	if (data->all_file[data->pars.col_c_line][i] == '\n' || !ft_isdigit(data->all_file[data->pars.col_c_line][i]))
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_COL_C_DATA);
 	}
 	if (check_color_c_data_p2(data, data->all_file[data->pars.col_c_line] + i))
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_COL_C_DATA);
 	}
 	return ;

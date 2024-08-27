@@ -69,7 +69,7 @@ int	check_in_line(t_data *data, char *str, int which)
 		;
 	else
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_BAD_DATA);
 	}
 	return (0);
@@ -94,7 +94,7 @@ void	check_if_missing_data(t_data *data)
 		|| data->pars.no_status == 0 || data->pars.so_status == 0
 		|| data->pars.we_status == 0 || data->pars.ea_status == 0)
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_MISSING_DATA);
 	}
 	return ;
@@ -106,7 +106,7 @@ void	check_if_to_much_data(t_data *data)
 		|| data->pars.no_status > 1 || data->pars.so_status > 1
 		|| data->pars.we_status > 1 || data->pars.ea_status > 1)
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_TO_MUCH_DATA);
 	}
 	return ;
@@ -120,20 +120,6 @@ void	init_pars_data(t_data *data)
 	data->pars.so_status = 0;
 	data->pars.we_status = 0;
 	data->pars.ea_status = 0;
-	data->rc = malloc(sizeof(t_rc));
-	if (!data->rc)
-		free_all(data, ERR ERR_MALLOC, 1);
-	data->rc->pl_dir[0] = 0;
-	data->rc->pl_dir[1] = 0;
-	data->rc->plane[0] = 0;
-	data->rc->plane[1] = 0;
-	data->rc->move_b = 0;
-	data->rc->move_f = 0;
-	data->rc->move_l = 0;
-	data->rc->move_r = 0;
-	data->rc->rot_l = 0;
-	data->rc->rot_r = 0;
-	data->rc->time = 0;
 	check_if_data(data);
 	check_if_missing_data(data);
 	check_if_to_much_data(data);

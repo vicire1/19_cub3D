@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/26 21:16:52 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/08/27 15:45:20 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS =	src/main.c \
 		src/gnl/get_next_line_utils.c \
 		src/raycasting.c \
 		src/moves.c \
+		src/hooks.c \
 
 OBJ_DIR = objets
 

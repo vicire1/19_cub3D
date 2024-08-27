@@ -2,12 +2,20 @@
 
 void	init_null(t_data *data)
 {
-	data->path[NO] = NULL;
-	data->path[SO] = NULL;
-	data->path[WE] = NULL;
-	data->path[EA] = NULL;
+	int i;
+
+	i = -1;
+	while (++i < 4)
+		data->path[i] = NULL;
+	i = -1;
+	while (++i < 4)
+		data->txtr[i].img = NULL;
 	data->all_file = NULL;
 	data->map = NULL;
+	data->ptr = NULL;
+	data->win = NULL;
+	data->img = NULL;
+	data->rc = NULL;
 }
 
 int	main(int ac, char **av)

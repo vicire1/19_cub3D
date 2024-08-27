@@ -56,6 +56,7 @@ void	parsing(int ac, char **av, t_data *data)
 	copy_all_file(data, av[1]);
 	// print_tab(data->all_file);
 	init_pars_data(data);
+	init_rc_struct(data);
 	pars_map(data);
 	(void)data;
 }

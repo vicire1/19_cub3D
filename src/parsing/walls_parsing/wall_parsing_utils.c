@@ -9,7 +9,7 @@ void	check_after_word(t_data *data, char *str)
 	{
 		if (!is_white_space(str[i]) && str[i] != '\n')
 		{
-			all_file_free(data);
+			free_all(data, NULL, 0);
 			print_exit(ERR ERR_WALL_NO_DATA);
 		}
 		i++;

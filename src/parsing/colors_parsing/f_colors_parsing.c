@@ -63,12 +63,12 @@ void	check_color_f_data(t_data *data)
 		i++;
 	if (data->all_file[data->pars.col_f_line][i] == '\n' || !ft_isdigit(data->all_file[data->pars.col_f_line][i]))
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_COL_F_DATA);
 	}
 	if (check_color_f_data_p2(data, data->all_file[data->pars.col_f_line] + i))
 	{
-		all_file_free(data);
+		free_all(data, NULL, 0);
 		print_exit(ERR ERR_COL_F_DATA);
 	}
 	return ;
