@@ -15,18 +15,39 @@ void	all_file_free(t_data *data)
 	data->all_file = NULL;
 }
 
+void	free_tex_path(t_data *data)
+{
+	int i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (data->path[i])
+		{
+			free(data->path[i]);
+			data->path[i] = NULL;
+		}
+	}
+}
+
+void	free_tex_img(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		mlx_destroy_image(data->ptr, data->txtr[i].img);
+	mlx_destroy_image(data->ptr, data->img->img);
+	free(data->img);
+}
+
 void	free_all(t_data *data, char *msg, int exit_s)
 {
 	if (data->all_file)
 		all_file_free(data);
-	if (data->path_N)
-		free(data->path_N);
-	if (data->path_S)
-		free(data->path_S);
-	if (data->path_W)
-		free(data->path_W);
-	if (data->path_E)
-		free(data->path_E);
+	free_tex_path(data);
+	free_tex_img(data);
+	free(data->rc);
 	if (msg)
 		printf("%s\n", msg);
 	if (exit_s)

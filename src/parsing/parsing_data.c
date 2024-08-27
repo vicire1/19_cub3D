@@ -122,7 +122,7 @@ void	init_pars_data(t_data *data)
 	data->pars.ea_status = 0;
 	data->rc = malloc(sizeof(t_rc));
 	if (!data->rc)
-		return ;
+		free_all(data, ERR ERR_MALLOC, 1);
 	data->rc->pl_dir[0] = 0;
 	data->rc->pl_dir[1] = 0;
 	data->rc->plane[0] = 0;

@@ -2,10 +2,10 @@
 
 void	init_null(t_data *data)
 {
-	data->path_N = NULL;
-	data->path_S = NULL;
-	data->path_W = NULL;
-	data->path_E = NULL;
+	data->path[NO] = NULL;
+	data->path[SO] = NULL;
+	data->path[WE] = NULL;
+	data->path[EA] = NULL;
 	data->all_file = NULL;
 	data->map = NULL;
 }

@@ -49,7 +49,6 @@ void	get_side_dist(t_data *data)
 
 void	hit_a_wall(t_data *data)
 {
-	data->rc->hit = 0;
 	while (data->rc->hit == 0)
 	{
 		if (data->rc->side_distX < data->rc->side_distY)
@@ -77,58 +76,28 @@ void	hit_a_wall(t_data *data)
 		data->rc->ray_len = data->rc->side_distY - data->rc->delta_distY;
 }
 
-uint32_t	get_color_value(t_data *data)
+void	get_line_spec(t_data *data)
 {
-	int	pix_index;
-	unsigned char *pixel;
-	uint32_t color;
-
-	pix_index = (TEX_SIZE * data->rc->tex_y + data->rc->tex_x) * (data->txtr[data->rc->side].bits_per_pixel / 8);
-	pixel = (unsigned char *)&data->txtr[data->rc->side].addr[pix_index];
-	color = (pixel[2] << 16) | (pixel[1] << 8) | pixel[0];
-	return (color);
-}
-
-void    get_line_spec(t_data *data)
-{
-    data->rc->line_h = (int)(SCREEN_H / data->rc->ray_len);
-    data->rc->line_start = -data->rc->line_h / 2 + SCREEN_H / 2 - 1;
-    if (data->rc->line_start < 0)
-        data->rc->line_start = 0;
-    data->rc->line_end = data->rc->line_h / 2 + SCREEN_H / 2;
-    if (data->rc->line_end >= SCREEN_H)
-        data->rc->line_end = SCREEN_H - 1;
+	data->rc->line_h = (int)(SCREEN_H / data->rc->ray_len);
+	data->rc->line_start = -data->rc->line_h / 2 + SCREEN_H / 2 - 1;
+	if (data->rc->line_start < 0)
+		data->rc->line_start = 0;
+	data->rc->line_end = data->rc->line_h / 2 + SCREEN_H / 2;
+	if (data->rc->line_end >= SCREEN_H)
+		data->rc->line_end = SCREEN_H - 1;
 	if (data->rc->side == EA || data->rc->side == WE)
-		data->rc->wall_x = data->rc->pl_pos[0] + data->rc->ray_len * data->rc->ray_dirY;
+		data->rc->wall_x = data->rc->pl_pos[0] + data->rc->ray_len
+			* data->rc->ray_dirY;
 	else
-		data->rc->wall_x = data->rc->pl_pos[1] + data->rc->ray_len * data->rc->ray_dirX;
+		data->rc->wall_x = data->rc->pl_pos[1] + data->rc->ray_len
+			* data->rc->ray_dirX;
 	data->rc->wall_x -= floor(data->rc->wall_x);
 	data->rc->tex_x = (int)(data->rc->wall_x * (double)TEX_SIZE);
 	if (data->rc->side == EA || data->rc->side == NO)
 		data->rc->tex_x = TEX_SIZE - data->rc->tex_x - 1;
 	data->rc->step = 1.0 * TEX_SIZE / data->rc->line_h;
-	data->rc->tex_pos = (data->rc->line_start - (SCREEN_H / 2) + (data->rc->line_h / 2)) * data->rc->step;
-}
-
-void	draw_line(t_data *data, int i)
-{
-	uint32_t	color;
-	int	n;
-
-	n = -1;
-	while (++n < data->rc->line_start)
-        my_mlx_pixel_put(data->img, i, n, 0x00CCFFFF);
-	while (data->rc->line_start < data->rc->line_end)
-	{
-		data->rc->tex_y = (int)data->rc->tex_pos & (TEX_SIZE - 1);
-		data->rc->tex_pos += data->rc->step;
-		color = get_color_value(data);
-		my_mlx_pixel_put(data->img, i, data->rc->line_start, color);
-		data->rc->line_start++;
-	}
-	n = data->rc->line_end;
-	while (++n < SCREEN_H)
-        my_mlx_pixel_put(data->img, i, n, 0x00C0C0C0);
+	data->rc->tex_pos = (data->rc->line_start - (SCREEN_H / 2)
+			+ (data->rc->line_h / 2)) * data->rc->step;
 }
 
 void	raycasting_loop(t_data *data)
@@ -138,17 +107,18 @@ void	raycasting_loop(t_data *data)
 	i = -1;
 	data->img->img = mlx_new_image(data->ptr, SCREEN_W, SCREEN_H);
 	if (!data->img->img)
-		exit (1);
+		exit(1);
 	data->img->addr = mlx_get_data_addr(data->img->img,
 			&data->img->bits_per_pixel, &data->img->line_length,
 			&data->img->endian);
 	while (++i < SCREEN_W)
 	{
+		data->rc->hit = 0;
 		get_ray_and_deltadist(data, i);
 		get_side_dist(data);
 		hit_a_wall(data);
-        get_line_spec(data);
-		draw_line(data, i);
+		get_line_spec(data);
+		draw_lines(data, i);
 	}
 	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
 }

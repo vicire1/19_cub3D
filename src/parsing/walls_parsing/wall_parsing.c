@@ -14,15 +14,15 @@ void	check_ea_data(t_data *data)
 		i++;
 	len = get_len_of_word(data->all_file[data->pars.ea_line] + i);
 	check_after_word(data, data->all_file[data->pars.ea_line] + len + i);
-	data->path_E = ft_substr(data->all_file[data->pars.ea_line], i, len, data);
-	fd_check = open(data->path_E, O_RDONLY);
+	data->path[EA] = ft_substr(data->all_file[data->pars.ea_line], i, len, data);
+	fd_check = open(data->path[EA], O_RDONLY);
 	if (fd_check == -1)
 	{
 
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_EA_DATA);
 	}
-	printf("EA path good => [%s]\n\n", data->path_E);
+	printf("EA path good => [%s]\n\n", data->path[EA]);
 }
 
 void	check_we_data(t_data *data)
@@ -39,15 +39,15 @@ void	check_we_data(t_data *data)
 		i++;
 	len = get_len_of_word(data->all_file[data->pars.we_line] + i);
 	check_after_word(data, data->all_file[data->pars.we_line] + len + i);
-	data->path_W = ft_substr(data->all_file[data->pars.we_line], i, len, data);
-	fd_check = open(data->path_W, O_RDONLY);
+	data->path[WE] = ft_substr(data->all_file[data->pars.we_line], i, len, data);
+	fd_check = open(data->path[WE], O_RDONLY);
 	if (fd_check == -1)
 	{
 
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_WE_DATA);
 	}
-	printf("WE path good => [%s]\n", data->path_W);
+	printf("WE path good => [%s]\n", data->path[WE]);
 }
 
 void	check_so_data(t_data *data)
@@ -64,15 +64,15 @@ void	check_so_data(t_data *data)
 		i++;
 	len = get_len_of_word(data->all_file[data->pars.so_line] + i);
 	check_after_word(data, data->all_file[data->pars.so_line] + len + i);
-	data->path_S = ft_substr(data->all_file[data->pars.so_line], i, len, data);
-	fd_check = open(data->path_S, O_RDONLY);
+	data->path[SO] = ft_substr(data->all_file[data->pars.so_line], i, len, data);
+	fd_check = open(data->path[SO], O_RDONLY);
 	if (fd_check == -1)
 	{
 
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_SO_DATA);
 	}
-	printf("SO path good => [%s]\n", data->path_S);
+	printf("SO path good => [%s]\n", data->path[SO]);
 }
 
 void	check_no_data(t_data *data)
@@ -89,13 +89,13 @@ void	check_no_data(t_data *data)
 		i++;
 	len = get_len_of_word(data->all_file[data->pars.no_line] + i);
 	check_after_word(data, data->all_file[data->pars.no_line] + len + i);
-	data->path_N = ft_substr(data->all_file[data->pars.no_line], i, len, data);
-	fd_check = open(data->path_N, O_RDONLY);
+	data->path[NO] = ft_substr(data->all_file[data->pars.no_line], i, len, data);
+	fd_check = open(data->path[NO], O_RDONLY);
 	if (fd_check == -1)
 	{
 
 		free_all(data, NULL, 0);
 		print_exit(ERR ERR_WALL_NO_DATA);
 	}
-	printf("NO path good => [%s]\n", data->path_N);
+	printf("NO path good => [%s]\n", data->path[NO]);
 }

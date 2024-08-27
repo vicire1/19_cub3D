@@ -51,6 +51,7 @@
 # define D 2
 # define L_ARR 123
 # define R_ARR 124
+# define ESC 53
 
 # define PARS_C "C"
 # define PARS_F "F"
@@ -130,15 +131,11 @@ typedef struct	s_rc
 	int		tex_y;
 	double	tex_pos;
 	double	step;
-	int		buffer[SCREEN_H][SCREEN_W];
 }	t_rc;
 
 typedef struct s_data
 {
-	char	*path_N;
-	char	*path_S;
-	char	*path_W;
-	char	*path_E;
+	char	*path[4];
 	t_img	txtr[4];
 	int		color_f[3];
 	int		color_c[3];
@@ -187,6 +184,7 @@ void	pars_map(t_data *data);
 // MLX
 void    create_window(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	draw_lines(t_data *data, int i);
 
 // raycasting
 void	raycasting_loop(t_data *data);
