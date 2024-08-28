@@ -137,7 +137,9 @@ typedef struct s_data
 	char	*path[4];
 	t_img	txtr[4];
 	int		color_f[3];
+	int		floor_color;
 	int		color_c[3];
+	int		cell_color;
 	char	**map;
 	int		fd_map;
 	char	**all_file;
@@ -164,8 +166,10 @@ void	init_pars_data(t_data *data);
 //colors_pasing
 // c_colors_parsing
 void	check_color_c_data(t_data *data);
+void	convert_rgb_hex_cell(t_data *data);
 // f_colors_parsing
 void	check_color_f_data(t_data *data);
+void	convert_rgb_hex_floor(t_data *data);
 
 //walls_parsing
 //wall_parsing

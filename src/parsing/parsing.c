@@ -50,6 +50,7 @@ void	print_tab(char **tab)
 	printf("\n");
 }
 
+
 void	parsing(int ac, char **av, t_data *data)
 {
 	parsing_arg(ac, av, data);
@@ -58,5 +59,6 @@ void	parsing(int ac, char **av, t_data *data)
 	init_pars_data(data);
 	init_rc_struct(data);
 	pars_map(data);
-	(void)data;
+	convert_rgb_hex_cell(data);
+	convert_rgb_hex_floor(data);
 }

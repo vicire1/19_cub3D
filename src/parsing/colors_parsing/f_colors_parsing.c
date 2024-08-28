@@ -73,3 +73,9 @@ void	check_color_f_data(t_data *data)
 	}
 	return ;
 }
+
+void	convert_rgb_hex_floor(t_data *data)
+{
+	data->floor_color = ((data->color_f[0] & 0xff) << 16) + ((data->color_f[1] & 0xff) << 8) + (data->color_f[2] & 0xff);
+	printf("FLOOR => %d \n", data->floor_color);	
+}

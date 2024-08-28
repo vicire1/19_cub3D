@@ -74,3 +74,9 @@ void	check_color_c_data(t_data *data)
 	}
 	return ;
 }
+
+void	convert_rgb_hex_cell(t_data *data)
+{
+	data->cell_color = (1 << 24 | data->color_c[0] << 16 | data->color_c[1] << 8 | data->color_c[2]);
+	printf("CELL => %d \n", data->cell_color);
+}
