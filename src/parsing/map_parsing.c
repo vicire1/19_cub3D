@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-void	check_if_empty_line(t_data *data, int	i)
+void	check_if_empty_line(t_data *data, int i)
 {
 	int	j;
 
@@ -11,7 +11,6 @@ void	check_if_empty_line(t_data *data, int	i)
 		{
 			if (!is_white_space(data->all_file[i][j]) && data->all_file[i][j] != '\n')
 			{
-				printf("ICI\n");
 				free_all(data, NULL, 0);
 				print_exit(ERR ERR_DATA_AFTER_MAP);
 			}
@@ -19,6 +18,26 @@ void	check_if_empty_line(t_data *data, int	i)
 		}
 		i++;
 	}
+}
+
+int		check_if_data_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			break ;
+		if (str[i] != ' ' && str[i] != '1' && str[i] != '0')
+			break ;
+		if (str[i] == '1' || str[i] == '0')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int		check_if_map_line(char *str)
@@ -46,7 +65,7 @@ int		nb_line_map(t_data *data)
 
 	i = 0;
 	ret = 0;
-	while (data->all_file[i] &&!check_if_map_line(data->all_file[i]))
+	while (data->all_file[i] &&!check_if_data_line(data->all_file[i]))
 		i++;
 	while (check_if_map_line(data->all_file[i]))
 	{
@@ -71,7 +90,7 @@ void	recup_map(t_data *data)
 	data->map = malloc(sizeof(char *) * (nb_line + 1));
 	if (!data->map)
 		free_all(data, ERR ERR_MALLOC, 1);
-	while (!check_if_map_line(data->all_file[i]))
+	while (!check_if_data_line(data->all_file[i]))
 		i++;
 	nb_line += i;
 	while (i < nb_line)

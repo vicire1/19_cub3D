@@ -1,9 +1,9 @@
 
-    F                   22,55,6
+    F                   21,55,6
 
 
 
-NO       ./texture/texture32.xpm    
+NO       ./texture/texture1.xpm    
 
          SO    ./texture/texture4.xpm
 
@@ -14,3 +14,10 @@ EA ./texture/texture6.xpm
 C 6,5,255
 
 
+
+01110
+01010
+10001
+10N01
+ 1010
+ 0100
