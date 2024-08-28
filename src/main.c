@@ -27,6 +27,6 @@ int	main(int ac, char **av)
 		return (1);
 	init_null(data);
 	parsing(ac, av, data);
-    create_window(data);
+	create_window(data);
 	return (0);
 }

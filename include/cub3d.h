@@ -188,8 +188,6 @@ int	cross_escape(t_data *data);
 int	key_release(int keysym, t_data *data);
 int	key_press(int keysym, t_data *data);
 void	init_rc_struct(t_data *data);
-void    put_mini_map(t_data *data);
-
 
 // raycasting
 void	raycasting_loop(t_data *data);

@@ -96,7 +96,7 @@ void	recup_map(t_data *data)
 		j++;
 		i++;
 	}
-	data->pars.map_h;
+	data->pars.map_h = nb_line;
 	data->map[j] = NULL;
 	return ;
 }
@@ -254,9 +254,9 @@ void	recover_player_start_pos(t_data *data)
 
 void	check_map_is_closed(t_data *data, int x, int y)
 {
-	if (x < 0 || y < 0 || !data->map[y][x] || data->map[y][x] == '1' || data->map[y][x] == 'O')
+	if (x < 0 || y < 0  || data->map[y][x] == '1' || data->map[y][x] == 'O')
 		return ;
-	if (data->map[y][x] == ' ')
+	if (data->map[y][x] == ' ' || data->map[y][x] == '\n' || !data->map[y][x])
 		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
 	data->map[y][x] = 'O';
 	check_map_is_closed(data, x - 1, y);
