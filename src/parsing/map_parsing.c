@@ -66,6 +66,8 @@ void	recup_map(t_data *data)
 	i = 0;
 	j = 0;
 	nb_line = nb_line_map(data);
+	if (nb_line == 0)
+		free_all(data, ERR ERR_MAP_DATA, 1);
 	data->map = malloc(sizeof(char *) * (nb_line + 1));
 	if (!data->map)
 		free_all(data, ERR ERR_MALLOC, 1);

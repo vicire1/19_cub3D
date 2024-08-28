@@ -1,4 +1,4 @@
-segfault quand pas de map ---> corrigé mais pas sur
+segfault quand pas de map ---> corrigé mais pas sur                  => corrigé sur la main 28/08 - 8h32
 
 parsing fonctionne pas si j'ai des 1 ou 0 dans mes textures
 
