@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 17:07:22 by lbirloue          #+#    #+#             */
+/*   Updated: 2024/08/28 17:08:45 by lbirloue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	check_if_empty_line(t_data *data, int i)
@@ -9,7 +21,8 @@ void	check_if_empty_line(t_data *data, int i)
 		j = 0;
 		while (data->all_file[i][j])
 		{
-			if (!is_white_space(data->all_file[i][j]) && data->all_file[i][j] != '\n')
+			if (!is_white_space(data->all_file[i][j])
+				&& data->all_file[i][j] != '\n')
 				free_all(data, ERR ERR_DATA_AFTER_MAP, 1);
 			j++;
 		}
@@ -17,7 +30,7 @@ void	check_if_empty_line(t_data *data, int i)
 	}
 }
 
-int		check_if_data_line(char *str)
+int	check_if_data_line(char *str)
 {
 	int	i;
 
@@ -37,7 +50,7 @@ int		check_if_data_line(char *str)
 	return (0);
 }
 
-int		check_if_map_line(char *str)
+int	check_if_map_line(char *str)
 {
 	int	i;
 
@@ -55,7 +68,7 @@ int		check_if_map_line(char *str)
 	return (0);
 }
 
-int		nb_line_map(t_data *data)
+int	nb_line_map(t_data *data)
 {
 	int	i;
 	int	ret;
@@ -92,7 +105,8 @@ void	recup_map(t_data *data)
 	nb_line += i;
 	while (i < nb_line)
 	{
-		data->map[j] = ft_substr(data->all_file[i], 0, ft_strlen_before_n_line(data->all_file[i]), data);
+		data->map[j] = ft_substr(data->all_file[i], 0,
+				ft_strlen_before_n_line(data->all_file[i]), data);
 		j++;
 		i++;
 	}
@@ -103,7 +117,8 @@ void	recup_map(t_data *data)
 
 int	map_char(char c)
 {
-	if (c != ' ' && c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '\n')
+	if (c != ' ' && c != '1' && c != '0' && c != 'N'
+		&& c != 'S' && c != 'W' && c != 'E' && c != '\n')
 		return (0);
 	return (1);
 }
@@ -148,11 +163,11 @@ void	recover_longest_map_line(t_data *data)
 
 void	fill_space_map(t_data *data)
 {
-	int	len_line;
-	int	i;
-	int	tab_size;
-	char *tmp;
-	char *tmp2;
+	int		len_line;
+	int		i;
+	int		tab_size;
+	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	tab_size = recover_tab_size(data->map);
@@ -164,7 +179,7 @@ void	fill_space_map(t_data *data)
 		tmp2 = mall_space_line(data->pars.longest_map_len - len_line, data);
 		if (tmp2)
 			data->map[i] = ft_strjoin(tmp, tmp2, data);
-		else 
+		else
 			data->map[i] = ft_strdup(tmp, data);
 		free(tmp2);
 		tmp2 = NULL;
@@ -254,15 +269,15 @@ void	recover_player_start_pos(t_data *data)
 
 void	check_map_is_closed(t_data *data, int x, int y)
 {
-	if (x < 0 || y < 0  || data->map[y][x] == '1' || data->map[y][x] == 'O')
+	if (x < 0 || y < 0 || data->map[y][x] == '1' || data->map[y][x] == 'O')
 		return ;
 	if (data->map[y][x] == ' ' || data->map[y][x] == '\n' || !data->map[y][x])
 		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
 	data->map[y][x] = 'O';
 	check_map_is_closed(data, x - 1, y);
 	check_map_is_closed(data, x + 1, y);
-	check_map_is_closed(data, x , y - 1);
-	check_map_is_closed(data, x , y + 1);
+	check_map_is_closed(data, x, y - 1);
+	check_map_is_closed(data, x, y + 1);
 }
 
 void	pars_map(t_data *data)
@@ -273,5 +288,6 @@ void	pars_map(t_data *data)
 	fill_space_map(data);
 	check_player_is_correct(data);
 	recover_player_start_pos(data);
-	check_map_is_closed(data, (int)data->rc->pl_pos[1], (int)data->rc->pl_pos[0]);
+	check_map_is_closed(data, (int)data->rc->pl_pos[1],
+		(int)data->rc->pl_pos[0]);
 }

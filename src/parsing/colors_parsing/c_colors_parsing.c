@@ -57,12 +57,15 @@ void	check_color_c_data(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->all_file[data->pars.col_c_line][i] != '\n' && is_white_space(data->all_file[data->pars.col_c_line][i]))
+	while (data->all_file[data->pars.col_c_line][i] != '\n'
+		&& is_white_space(data->all_file[data->pars.col_c_line][i]))
 		i++;
 	i++;
-	while (data->all_file[data->pars.col_c_line][i] != '\n' && is_white_space(data->all_file[data->pars.col_c_line][i]))
+	while (data->all_file[data->pars.col_c_line][i] != '\n'
+		&& is_white_space(data->all_file[data->pars.col_c_line][i]))
 		i++;
-	if (data->all_file[data->pars.col_c_line][i] == '\n' || !ft_isdigit(data->all_file[data->pars.col_c_line][i]))
+	if (data->all_file[data->pars.col_c_line][i] == '\n'
+		|| !ft_isdigit(data->all_file[data->pars.col_c_line][i]))
 		free_all(data, ERR ERR_COL_C_DATA, 1);
 	if (check_color_c_data_p2(data, data->all_file[data->pars.col_c_line] + i))
 		free_all(data, ERR ERR_COL_C_DATA, 1);
@@ -71,5 +74,6 @@ void	check_color_c_data(t_data *data)
 
 void	convert_rgb_hex_cell(t_data *data)
 {
-	data->cell_color = (1 << 24 | data->color_c[0] << 16 | data->color_c[1] << 8 | data->color_c[2]);
+	data->cell_color = (1 << 24 | data->color_c[0] << 16
+			| data->color_c[1] << 8 | data->color_c[2]);
 }

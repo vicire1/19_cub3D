@@ -70,5 +70,6 @@ void	check_color_f_data(t_data *data)
 
 void	convert_rgb_hex_floor(t_data *data)
 {
-	data->floor_color = (1 << 24 | data->color_f[0] << 16 | data->color_f[1] << 8 | data->color_f[2]);
+	data->floor_color = (1 << 24 | data->color_f[0] << 16
+			| data->color_f[1] << 8 | data->color_f[2]);
 }
