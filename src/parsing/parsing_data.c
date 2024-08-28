@@ -68,10 +68,7 @@ int	check_in_line(t_data *data, char *str, int which)
 	else if (!check_map_line_data(str))
 		;
 	else
-	{
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_BAD_DATA);
-	}
+		free_all(data, ERR ERR_BAD_DATA, 1);
 	return (0);
 }
 
@@ -93,10 +90,7 @@ void	check_if_missing_data(t_data *data)
 	if (data->pars.col_c_status == 0 || data->pars.col_f_status == 0
 		|| data->pars.no_status == 0 || data->pars.so_status == 0
 		|| data->pars.we_status == 0 || data->pars.ea_status == 0)
-	{
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_MISSING_DATA);
-	}
+		free_all(data, ERR ERR_MISSING_DATA, 1);
 	return ;
 }
 
@@ -105,10 +99,7 @@ void	check_if_to_much_data(t_data *data)
 	if (data->pars.col_c_status > 1 || data->pars.col_f_status > 1
 		|| data->pars.no_status > 1 || data->pars.so_status > 1
 		|| data->pars.we_status > 1 || data->pars.ea_status > 1)
-	{
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_TO_MUCH_DATA);
-	}
+		free_all(data, ERR ERR_TO_MUCH_DATA, 1);
 	return ;
 }
 

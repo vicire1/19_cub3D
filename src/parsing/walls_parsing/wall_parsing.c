@@ -17,12 +17,7 @@ void	check_ea_data(t_data *data)
 	data->path[EA] = ft_substr(data->all_file[data->pars.ea_line], i, len, data);
 	fd_check = open(data->path[EA], O_RDONLY);
 	if (fd_check == -1)
-	{
-
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_WALL_EA_DATA);
-	}
-	printf("EA path good => [%s]\n\n", data->path[EA]);
+		free_all(data, ERR ERR_WALL_EA_DATA, 1);
 }
 
 void	check_we_data(t_data *data)
@@ -42,12 +37,7 @@ void	check_we_data(t_data *data)
 	data->path[WE] = ft_substr(data->all_file[data->pars.we_line], i, len, data);
 	fd_check = open(data->path[WE], O_RDONLY);
 	if (fd_check == -1)
-	{
-
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_WALL_WE_DATA);
-	}
-	printf("WE path good => [%s]\n", data->path[WE]);
+		free_all(data, ERR ERR_WALL_WE_DATA, 1);
 }
 
 void	check_so_data(t_data *data)
@@ -67,12 +57,7 @@ void	check_so_data(t_data *data)
 	data->path[SO] = ft_substr(data->all_file[data->pars.so_line], i, len, data);
 	fd_check = open(data->path[SO], O_RDONLY);
 	if (fd_check == -1)
-	{
-
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_WALL_SO_DATA);
-	}
-	printf("SO path good => [%s]\n", data->path[SO]);
+		free_all(data, ERR ERR_WALL_SO_DATA, 1);
 }
 
 void	check_no_data(t_data *data)
@@ -92,10 +77,5 @@ void	check_no_data(t_data *data)
 	data->path[NO] = ft_substr(data->all_file[data->pars.no_line], i, len, data);
 	fd_check = open(data->path[NO], O_RDONLY);
 	if (fd_check == -1)
-	{
-
-		free_all(data, NULL, 0);
-		print_exit(ERR ERR_WALL_NO_DATA);
-	}
-	printf("NO path good => [%s]\n", data->path[NO]);
+		free_all(data, ERR ERR_WALL_NO_DATA, 1);
 }

@@ -10,10 +10,7 @@ void	check_if_empty_line(t_data *data, int i)
 		while (data->all_file[i][j])
 		{
 			if (!is_white_space(data->all_file[i][j]) && data->all_file[i][j] != '\n')
-			{
-				free_all(data, NULL, 0);
-				print_exit(ERR ERR_DATA_AFTER_MAP);
-			}
+				free_all(data, ERR ERR_DATA_AFTER_MAP, 1);
 			j++;
 		}
 		i++;
@@ -99,6 +96,7 @@ void	recup_map(t_data *data)
 		j++;
 		i++;
 	}
+	data->pars.map_h;
 	data->map[j] = NULL;
 	return ;
 }
@@ -259,44 +257,13 @@ void	check_map_is_closed(t_data *data, int x, int y)
 	if (x < 0 || y < 0 || !data->map[y][x] || data->map[y][x] == '1' || data->map[y][x] == 'O')
 		return ;
 	if (data->map[y][x] == ' ')
-	{
 		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
-	}
 	data->map[y][x] = 'O';
 	check_map_is_closed(data, x - 1, y);
 	check_map_is_closed(data, x + 1, y);
 	check_map_is_closed(data, x , y - 1);
 	check_map_is_closed(data, x , y + 1);
 }
-
-// void	reset_player_pos(t_data *data)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = 0;
-// 	while (data->map[y])
-// 	{
-// 		x = 0;
-// 		while (data->map[y][x])
-// 		{
-// 			if (x == (int)data->rc->pl_pos[1] && y == (int)data->rc->pl_pos[0])
-// 			{
-// 				if (data->rc->pl_dir[0] == -1 && data->rc->pl_dir[1] == 0)
-// 					data->map[y][x] = 'N';
-// 				else if (data->rc->pl_dir[0] == 1 && data->rc->pl_dir[1] == 0)
-// 					data->map[y][x] = 'S';
-// 				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == -1)
-// 					data->map[y][x] = 'W';
-// 				else if (data->rc->pl_dir[0] == 0 && data->rc->pl_dir[1] == 1)
-// 					data->map[y][x] = 'E';
-// 				return ;
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
 
 void	pars_map(t_data *data)
 {
@@ -307,6 +274,4 @@ void	pars_map(t_data *data)
 	check_player_is_correct(data);
 	recover_player_start_pos(data);
 	check_map_is_closed(data, (int)data->rc->pl_pos[1], (int)data->rc->pl_pos[0]);
-	// reset_player_pos(data);
-	print_tab(data->map);
 }

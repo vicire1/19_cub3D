@@ -22,9 +22,6 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 
-    (void)ac;
-    (void)av;
-	// parsing
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (1);

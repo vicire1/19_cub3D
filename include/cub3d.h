@@ -44,6 +44,7 @@
 # define SCREEN_W 1280
 # define SCREEN_H 720
 # define TEX_SIZE 64
+# define MAP_SIZE SCREEN_H/4
 
 # define A 0
 # define W 13
@@ -81,6 +82,7 @@ typedef struct	s_parsing
 	int	col_c_status;
 	int	col_f_status;
 	int longest_map_len;
+	int	map_h;
 }				t_parsing;
 
 typedef struct s_img
@@ -151,12 +153,6 @@ typedef struct s_data
 }			t_data;
 
 
-
-/*!!!!!!!*/
-void	print_tab(char **tab);
-
-int			main(int ac, char **av);
-
 // parsing
 void		parsing(int ac, char **av, t_data *data);
 // paring_data
@@ -192,6 +188,7 @@ int	cross_escape(t_data *data);
 int	key_release(int keysym, t_data *data);
 int	key_press(int keysym, t_data *data);
 void	init_rc_struct(t_data *data);
+void    put_mini_map(t_data *data);
 
 
 // raycasting
@@ -213,10 +210,8 @@ void	copy_all_file(t_data *data, char *map_name);
 int	ft_strlen_before_n_line(char *str);
 int	recover_tab_size(char **tab);
 char	*mall_space_line(int len, t_data *data);
-void	print_exit(char *msg);
 
 //free_utils
-void	all_file_free(t_data *data);
 void	free_all(t_data *data, char *msg, int exit_s);
 
 #endif

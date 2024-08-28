@@ -27,8 +27,8 @@ void	draw_lines(t_data *data, int i)
 
 	n = -1;
 	while (++n < data->rc->line_start)
-		my_mlx_pixel_put(data->img, i, n, 0x00CCFFFF);
-	while (data->rc->line_start < data->rc->line_end)
+		my_mlx_pixel_put(data->img, i, n, data->cell_color);
+	while (data->rc->line_start <= data->rc->line_end)
 	{
 		data->rc->tex_y = (int)data->rc->tex_pos & (TEX_SIZE - 1);
 		data->rc->tex_pos += data->rc->step;
@@ -38,5 +38,5 @@ void	draw_lines(t_data *data, int i)
 	}
 	n = data->rc->line_end;
 	while (++n < SCREEN_H)
-		my_mlx_pixel_put(data->img, i, n, 0x00C0C0C0);
+		my_mlx_pixel_put(data->img, i, n, data->floor_color);
 }

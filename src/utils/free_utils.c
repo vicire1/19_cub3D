@@ -59,8 +59,7 @@ void	free_all(t_data *data, char *msg, int exit_s)
 	if (data->ptr)
 		free(data->ptr);
 	if (msg)
-		printf("%s\n", msg);
-	if (exit_s)
-		exit(exit_s);
+		ft_printf_fd(2, "%s\n", msg);
+	exit(exit_s);
 	return ;
 }

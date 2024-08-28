@@ -53,17 +53,17 @@ void	hit_a_wall(t_data *data)
 	{
 		if (data->rc->side_distX < data->rc->side_distY)
 		{
-			data->rc->side = EA;
+			data->rc->side = WE;
 			if (data->rc->ray_dirX < 0)
-				data->rc->side = WE;
+				data->rc->side = EA;
 			data->rc->side_distX += data->rc->delta_distX;
 			data->rc->mapX += data->rc->stepX;
 		}
 		else
 		{
-			data->rc->side = SO;
+			data->rc->side = NO;
 			if (data->rc->ray_dirY < 0)
-				data->rc->side = NO;
+				data->rc->side = SO;
 			data->rc->side_distY += data->rc->delta_distY;
 			data->rc->mapY += data->rc->stepY;
 		}
@@ -107,7 +107,7 @@ void	raycasting_loop(t_data *data)
 	i = -1;
 	data->img->img = mlx_new_image(data->ptr, SCREEN_W, SCREEN_H);
 	if (!data->img->img)
-		exit(1);
+		free_all(data, ERR ERR_MALLOC, 1);
 	data->img->addr = mlx_get_data_addr(data->img->img,
 			&data->img->bits_per_pixel, &data->img->line_length,
 			&data->img->endian);
@@ -120,5 +120,6 @@ void	raycasting_loop(t_data *data)
 		get_line_spec(data);
 		draw_lines(data, i);
 	}
+	// put_mini_map(data);
 	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
 }

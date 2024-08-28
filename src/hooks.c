@@ -15,10 +15,7 @@ int	key_press(int keysym, t_data *data)
 	if (keysym == D)
 		data->rc->move_r = 1;
 	if (keysym == ESC)
-	{
 		free_all(data, NULL, 0);
-		exit(0);
-	}
 	return (0);
 }
 
@@ -42,6 +39,5 @@ int	key_release(int keysym, t_data *data)
 int	cross_escape(t_data *data)
 {
 	free_all(data, NULL, 0);
-	exit(0);
 	return (0);
 }

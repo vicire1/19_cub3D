@@ -8,10 +8,7 @@ void	check_after_word(t_data *data, char *str)
 	while (str[i] || is_white_space(str[i]) || str[i] == '\n')
 	{
 		if (!is_white_space(str[i]) && str[i] != '\n')
-		{
-			free_all(data, NULL, 0);
-			print_exit(ERR ERR_WALL_NO_DATA);
-		}
+			free_all(data, ERR ERR_WALL_NO_DATA, 1);
 		i++;
 	}
 

@@ -28,34 +28,19 @@ int	check_map_name(char *str)
 void	parsing_arg(int ac, char **av, t_data *data)
 {
 	if (ac < 2)
-		print_exit(ERR ERR_ARG_NB_FEW);
+		free_all(data, ERR ERR_ARG_NB_FEW, 1);
 	else if (ac > 2)
-		print_exit(ERR ERR_ARG_NB_MUCH);
+		free_all(data, ERR ERR_ARG_NB_MUCH, 1);
 	else if (check_map_name(av[1]))
-		print_exit(ERR ERR_ARG_NOT_CUB);
+		free_all(data, ERR ERR_ARG_NOT_CUB, 1);
 	else if (check_map_exist(av[1], data))
-		print_exit(ERR ERR_ARG_NOT_VALID_NAME);
+		free_all(data, ERR ERR_ARG_NOT_VALID_NAME, 1);
 }
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-	printf("\n");
-}
-
 
 void	parsing(int ac, char **av, t_data *data)
 {
 	parsing_arg(ac, av, data);
 	copy_all_file(data, av[1]);
-	// print_tab(data->all_file);
 	init_pars_data(data);
 	init_rc_struct(data);
 	pars_map(data);

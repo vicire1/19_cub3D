@@ -11,7 +11,7 @@ void	load_xpm(t_data *data)
 	data->txtr[EA].img = mlx_xpm_file_to_image(data->ptr, data->path[EA], &w, &h);
 	if (!data->txtr[NO].img || !data->txtr[SO].img || !data->txtr[WE].img
 		|| !data->txtr[EA].img)
-		exit(1);
+		free_all(data, ERR ERR_MALLOC, 1);
 	data->txtr[NO].addr = mlx_get_data_addr(data->txtr[NO].img,
 			&data->txtr[NO].bits_per_pixel, &data->txtr[NO].line_length,
 			&data->txtr[NO].endian);
