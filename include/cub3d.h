@@ -44,7 +44,6 @@
 # define SCREEN_W 1280
 # define SCREEN_H 720
 # define TEX_SIZE 64
-# define MAP_SIZE SCREEN_H/4
 
 # define A 0
 # define W 13

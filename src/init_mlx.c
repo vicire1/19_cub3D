@@ -1,17 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 17:03:45 by vdecleir          #+#    #+#             */
+/*   Updated: 2024/08/28 17:05:40 by vdecleir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
-void	load_xpm(t_data *data)
+void	get_textures_addr(t_data *data)
 {
-	int	w;
-	int	h;
-
-	data->txtr[NO].img = mlx_xpm_file_to_image(data->ptr, data->path[NO], &w, &h);
-	data->txtr[SO].img = mlx_xpm_file_to_image(data->ptr, data->path[SO], &w, &h);
-	data->txtr[WE].img = mlx_xpm_file_to_image(data->ptr, data->path[WE], &w, &h);
-	data->txtr[EA].img = mlx_xpm_file_to_image(data->ptr, data->path[EA], &w, &h);
-	if (!data->txtr[NO].img || !data->txtr[SO].img || !data->txtr[WE].img
-		|| !data->txtr[EA].img)
-		free_all(data, ERR ERR_MALLOC, 1);
 	data->txtr[NO].addr = mlx_get_data_addr(data->txtr[NO].img,
 			&data->txtr[NO].bits_per_pixel, &data->txtr[NO].line_length,
 			&data->txtr[NO].endian);
@@ -24,6 +26,25 @@ void	load_xpm(t_data *data)
 	data->txtr[EA].addr = mlx_get_data_addr(data->txtr[EA].img,
 			&data->txtr[EA].bits_per_pixel, &data->txtr[EA].line_length,
 			&data->txtr[EA].endian);
+}
+
+void	load_xpm(t_data *data)
+{
+	int	w;
+	int	h;
+
+	data->txtr[NO].img = mlx_xpm_file_to_image(data->ptr, data->path[NO], &w,
+			&h);
+	data->txtr[SO].img = mlx_xpm_file_to_image(data->ptr, data->path[SO], &w,
+			&h);
+	data->txtr[WE].img = mlx_xpm_file_to_image(data->ptr, data->path[WE], &w,
+			&h);
+	data->txtr[EA].img = mlx_xpm_file_to_image(data->ptr, data->path[EA], &w,
+			&h);
+	if (!data->txtr[NO].img || !data->txtr[SO].img || !data->txtr[WE].img
+		|| !data->txtr[EA].img)
+		free_all(data, ERR ERR_MALLOC, 1);
+	get_textures_addr(data);
 }
 
 void	init_rc_struct(t_data *data)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 17:03:55 by vdecleir          #+#    #+#             */
+/*   Updated: 2024/08/28 17:06:09 by vdecleir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	get_ray_and_deltadist(t_data *data, int i)
@@ -120,6 +132,5 @@ void	raycasting_loop(t_data *data)
 		get_line_spec(data);
 		draw_lines(data, i);
 	}
-	// put_mini_map(data);
 	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
 }
