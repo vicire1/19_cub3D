@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:51 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/28 17:03:52 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:19:06 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ void	go_left_right(t_data *data, int dir)
 	if (dir == A)
 	{
 		new_pos_x = data->rc->pl_pos[1] + (data->rc->pl_dir[0]
-				* data->rc->frame_time * 5);
+				* data->rc->frame_time * 2);
 		new_pos_y = data->rc->pl_pos[0] - (data->rc->pl_dir[1]
-				* data->rc->frame_time * 5);
+				* data->rc->frame_time * 2);
 	}
 	if (dir == D)
 	{
 		new_pos_x = data->rc->pl_pos[1] - (data->rc->pl_dir[0]
-				* data->rc->frame_time * 5);
+				* data->rc->frame_time * 2);
 		new_pos_y = data->rc->pl_pos[0] + (data->rc->pl_dir[1]
-				* data->rc->frame_time * 5);
+				* data->rc->frame_time * 2);
 	}
 	actualise_pos(data, new_pos_x, new_pos_y);
 }
@@ -83,6 +83,23 @@ void	rotate(t_data *data, double speed)
 		* sin(speed);
 	data->rc->plane[0] = old_plane_X * sin(speed) + data->rc->plane[0]
 		* cos(speed);
+}
+
+void	mouse_rot(t_data *data)
+{
+	int	x;
+	int	y;
+
+	mlx_mouse_show();
+	if (!data->rc->mouse)
+	{
+		mlx_mouse_hide();
+		mlx_mouse_get_pos(data->win, &x, &y);
+		if (x != (SCREEN_W/2))
+			rotate(data, data->rc->frame_time * (x - SCREEN_W/2) / 3);
+		mlx_mouse_move(data->win, SCREEN_W/2, SCREEN_H/2);
+	}
+		
 }
 
 int	move(t_data *data)
@@ -105,6 +122,7 @@ int	move(t_data *data)
 		rotate(data, data->rc->frame_time * 3);
 	if (data->rc->rot_l == 1)
 		rotate(data, -data->rc->frame_time * 3);
+	mouse_rot(data);
 	mlx_destroy_image(data->ptr, data->img->img);
 	raycasting_loop(data);
 	return (0);

@@ -51,6 +51,8 @@
 # define D 2
 # define L_ARR 123
 # define R_ARR 124
+# define TAB 48
+# define SPACE 49
 # define ESC 53
 
 # define PARS_C "C"
@@ -101,16 +103,16 @@ typedef struct	s_rc
 	double	time;
 	double	oldtime;
 	double	cam_x;
-	double	ray_dirX;  //rayon de vue
-	double	ray_dirY;
-	double	side_distX;		//distance entre jour et prochain croisement avec x ou y
-	double	side_distY;
-	double	delta_distX;	// distance entre un x et un autre x
-	double	delta_distY;
-	int		mapX;			// int de la position qui va permettre d'aller voir plus loin
-	int		mapY;
-	int		stepX;			// direction
-	int		stepY;
+	double	ray_dir_x;  //rayon de vue
+	double	ray_dir_y;
+	double	side_dist_x;		//distance entre jour et prochain croisement avec x ou y
+	double	side_dist_y;
+	double	delta_dist_x;	// distance entre un x et un autre x
+	double	delta_dist_y;
+	int		map_x;			// int de la position qui va permettre d'aller voir plus loin
+	int		map_y;
+	int		step_x;			// direction
+	int		step_y;
 	int		hit;		// flag pour avoir si on a rencontre un mur
 	int		side;		// savoir si on touche en NS ou WE
 	double	ray_len;	// longueur du rayon de vue avant qu'il touche
@@ -126,6 +128,8 @@ typedef struct	s_rc
 	int		move_r;
 	int		rot_l;
 	int		rot_r;
+	int		mouse;
+	int		shoot;
 	double	wall_x;    // ou le mur a ete touche exactement
 	int		tex_x;
 	int		tex_y;
@@ -137,6 +141,8 @@ typedef struct s_data
 {
 	char	*path[4];
 	t_img	txtr[4];
+	void	*gun;
+	void	*shoot_img;
 	int		color_f[3];
 	int		floor_color;
 	int		color_c[3];
@@ -149,6 +155,7 @@ typedef struct s_data
     void    *win;
     t_img   *img;
 	t_rc	*rc;
+	int		counter;
 }			t_data;
 
 

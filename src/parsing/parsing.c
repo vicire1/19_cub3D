@@ -40,6 +40,7 @@ void	parsing_arg(int ac, char **av, t_data *data)
 void	parsing(int ac, char **av, t_data *data)
 {
 	parsing_arg(ac, av, data);
+	// printf("ok\n");
 	copy_all_file(data, av[1]);
 	init_pars_data(data);
 	init_rc_struct(data);

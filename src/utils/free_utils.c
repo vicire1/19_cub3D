@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:32 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/28 17:04:02 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:19:45 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	free_img(t_data *data)
 		if (data->txtr[i].img)
 			mlx_destroy_image(data->ptr, data->txtr[i].img);
 	}
+	if (data->gun)
+		mlx_destroy_image(data->ptr, data->gun);
+	if (data->shoot_img)
+		mlx_destroy_image(data->ptr, data->shoot_img);
 	if (data->img && data->img->img)
 		mlx_destroy_image(data->ptr, data->img->img);
 	free(data->img);
