@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+         #
+#    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/28 16:43:44 by lbirloue         ###   ########.fr        #
+#    Updated: 2024/08/30 23:42:44 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS =	src/main.c \
 		src/raycasting.c \
 		src/moves.c \
 		src/hooks.c \
+		src/minimap.c \
 
 OBJ_DIR = objets
 

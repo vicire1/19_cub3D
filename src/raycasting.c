@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:55 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/30 19:31:32 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/08/30 23:44:00 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	raycasting_loop(t_data *data)
 		get_line_spec(data);
 		draw_lines(data, i);
 	}
+	put_minimap(data);
 	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
 	if (data->rc->shoot == 1)
 	{

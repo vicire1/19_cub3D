@@ -44,6 +44,7 @@
 # define SCREEN_W 1280
 # define SCREEN_H 720
 # define TEX_SIZE 64
+# define MAP_SIZE SCREEN_H/4
 
 # define A 0
 # define W 13
@@ -194,6 +195,7 @@ int	cross_escape(t_data *data);
 int	key_release(int keysym, t_data *data);
 int	key_press(int keysym, t_data *data);
 void	init_rc_struct(t_data *data);
+void    put_minimap(t_data *data);
 
 // raycasting
 void	raycasting_loop(t_data *data);
