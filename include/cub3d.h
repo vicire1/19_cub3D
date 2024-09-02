@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:59:54 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 14:10:32 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:44:16 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@
 # define ERR_ARG_NB_FEW "\033[1;31mToo few arguments\n\033[00m"
 # define ERR_MALLOC "\033[1;31mMalloc failed\n\033[00m"
 # define ERR_OPEN "\033[1;31mOpen failed\n\033[00m"
-# define ERR_ARG_NB_MUCH "\033[1;31mToo much arguments\n\033[00m"
+# define ERR_ARG_NB_MUCH "\033[1;31mToo many arguments\n\033[00m"
 # define ERR_ARG_NOT_CUB "\033[1;31mThe map is not a '.cub' file\n\033[00m"
 # define ERR_ARG_NOT_VALID_NAME "\033[1;31mInvalid file name\n\033[00m"
-# define ERR_MISSING_DATA "\033[1;31mData are missing\n\033[00m"
-# define ERR_TO_MUCH_DATA "\033[1;31mData in double\n\033[00m"
-/// check la trad
+# define ERR_MISSING_DATA "\033[1;31mMissing data(s)\n\033[00m"
+# define ERR_TO_MUCH_DATA "\033[1;31mData(s) in double\n\033[00m"
 # define ERR_BAD_DATA "\033[1;31mBad data\n\033[00m"
 
 # define ERR_COL_C_DATA "\033[1;31mBad ceiling data\n\033[00m"

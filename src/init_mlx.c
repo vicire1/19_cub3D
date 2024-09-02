@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:45 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:03:03 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:42:35 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	create_window(t_data *data)
 	data->img->img = NULL;
 	load_xpm(data);
 	raycasting_loop(data);
+	mlx_mouse_move(data->win, SCREEN_W / 2, SCREEN_H / 2);
 	mlx_hook(data->win, 2, 1L << 0, &key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, &key_release, data);
 	mlx_hook(data->win, 17, 0, &cross_escape, data);
