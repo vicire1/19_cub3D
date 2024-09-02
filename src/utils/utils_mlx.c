@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:39 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/29 15:39:58 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:02:12 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ void	draw_cross(t_data *data)
 {
 	int	x;
 	int	y;
-	
-	x = SCREEN_W/2 - 11;
-	y = SCREEN_H/2 - 11;
+
+	x = SCREEN_W / 2 - 11;
+	y = SCREEN_H / 2 - 11;
 	if (x < 0 || y < 0)
 		free_all(data, "Screen too small", 1);
-	while (++x <= SCREEN_W/2 + 10)
-		my_mlx_pixel_put(data->img, x, SCREEN_H/2, 0x00FFFFFF);
-	while (++y <= SCREEN_H/2 + 10)
-		my_mlx_pixel_put(data->img, SCREEN_W/2, y, 0x00FFFFFF);
+	while (++x <= SCREEN_W / 2 + 10)
+		my_mlx_pixel_put(data->img, x, SCREEN_H / 2, 0x00FFFFFF);
+	while (++y <= SCREEN_H / 2 + 10)
+		my_mlx_pixel_put(data->img, SCREEN_W / 2, y, 0x00FFFFFF);
 }
 
 void	draw_lines(t_data *data, int i)
 {
-	uint32_t color;
-	int n;
+	uint32_t	color;
+	int			n;
 
 	n = -1;
 	while (++n < data->rc->line_start)

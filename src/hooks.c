@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:42 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/30 17:18:26 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:02:47 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	key_release(int keysym, t_data *data)
 	if (keysym == SPACE)
 	{
 		data->rc->shoot = 0;
-		data->counter = 0;	
+		data->counter = 0;
 	}
 	return (0);
 }

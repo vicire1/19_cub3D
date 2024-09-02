@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:55 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/30 23:44:00 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:05:02 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,5 @@ void	raycasting_loop(t_data *data)
 	}
 	put_minimap(data);
 	mlx_put_image_to_window(data->ptr, data->win, data->img->img, 0, 0);
-	if (data->rc->shoot == 1)
-	{
-		if (data->counter > 10)
-			data->counter = 0;
-		if (data->counter < 5)
-			mlx_put_image_to_window(data->ptr, data->win, data->shoot_img, 590, 370);\
-		data->counter++;
-	}
-	mlx_put_image_to_window(data->ptr, data->win, data->gun, 0, 0);
+	gun_shoot(data);
 }

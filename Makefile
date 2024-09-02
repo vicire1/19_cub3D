@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/08/30 23:42:44 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/09/02 10:58:04 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS =	src/main.c \
 		src/moves.c \
 		src/hooks.c \
 		src/minimap.c \
+		src/utils/utils_bonus.c \
 
 OBJ_DIR = objets
 

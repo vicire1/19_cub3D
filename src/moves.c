@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:51 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/30 19:19:06 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:04:41 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,20 @@
 
 void	actualise_pos(t_data *data, double new_pos_x, double new_pos_y)
 {
-	if (data->map[(int)new_pos_y][(int)data->rc->pl_pos[1]] == 'O')
+	double	pos_coll_x;
+	double	pos_coll_y;
+
+	if (new_pos_x > data->rc->pl_pos[1])
+		pos_coll_x = new_pos_x + 0.125;
+	else
+		pos_coll_x = new_pos_x - 0.125;
+	if (new_pos_y > data->rc->pl_pos[0])
+		pos_coll_y = new_pos_y + 0.125;
+	else
+		pos_coll_y = new_pos_y - 0.125;
+	if (data->map[(int)pos_coll_y][(int)data->rc->pl_pos[1]] == 'O')
 		data->rc->pl_pos[0] = new_pos_y;
-	if (data->map[(int)data->rc->pl_pos[0]][(int)new_pos_x] == 'O')
+	if (data->map[(int)data->rc->pl_pos[0]][(int)pos_coll_x] == 'O')
 		data->rc->pl_pos[1] = new_pos_x;
 }
 
@@ -70,36 +81,19 @@ void	go_left_right(t_data *data, int dir)
 
 void	rotate(t_data *data, double speed)
 {
-	double	old_dir_X;
-	double	old_plane_X;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	old_dir_X = data->rc->pl_dir[1];
+	old_dir_x = data->rc->pl_dir[1];
 	data->rc->pl_dir[1] = data->rc->pl_dir[1] * cos(speed) - data->rc->pl_dir[0]
 		* sin(speed);
-	data->rc->pl_dir[0] = old_dir_X * sin(speed) + data->rc->pl_dir[0]
+	data->rc->pl_dir[0] = old_dir_x * sin(speed) + data->rc->pl_dir[0]
 		* cos(speed);
-	old_plane_X = data->rc->plane[1];
+	old_plane_x = data->rc->plane[1];
 	data->rc->plane[1] = data->rc->plane[1] * cos(speed) - data->rc->plane[0]
 		* sin(speed);
-	data->rc->plane[0] = old_plane_X * sin(speed) + data->rc->plane[0]
+	data->rc->plane[0] = old_plane_x * sin(speed) + data->rc->plane[0]
 		* cos(speed);
-}
-
-void	mouse_rot(t_data *data)
-{
-	int	x;
-	int	y;
-
-	mlx_mouse_show();
-	if (!data->rc->mouse)
-	{
-		mlx_mouse_hide();
-		mlx_mouse_get_pos(data->win, &x, &y);
-		if (x != (SCREEN_W/2))
-			rotate(data, data->rc->frame_time * (x - SCREEN_W/2) / 3);
-		mlx_mouse_move(data->win, SCREEN_W/2, SCREEN_H/2);
-	}
-		
 }
 
 int	move(t_data *data)
