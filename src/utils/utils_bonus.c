@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:52:00 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:01:57 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:29:35 by lbirloue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	is_in_map(t_data *data, int x, int y)
+int	is_in_map(t_data *data, double x, double y)
 {
 	if (x < 0 || y < 0)
 		return (0);
-	if (x > data->pars.longest_map_len - 1 || y > data->pars.map_h - 1)
+	if ((int)x > data->pars.longest_map_len - 1
+		|| (int)y > data->pars.map_h - 1)
 		return (0);
 	else
 		return (1);

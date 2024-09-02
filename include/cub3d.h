@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:59:54 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:31:25 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:10:32 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../src/ft_printf_fd/ft_printf.h"
-# include "../src/mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include "./get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
@@ -263,7 +263,7 @@ int					key_release(int keysym, t_data *data);
 int					key_press(int keysym, t_data *data);
 void				init_rc_struct(t_data *data);
 void				put_minimap(t_data *data);
-int					is_in_map(t_data *data, int x, int y);
+int					is_in_map(t_data *data, double x, double y);
 int					is_wall(t_data *data, int x, int y);
 void				mouse_rot(t_data *data);
 void				gun_shoot(t_data *data);

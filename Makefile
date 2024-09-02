@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
+#    By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/09/02 11:33:39 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/09/02 15:12:03 by lbirloue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 MLX = libmlx.a
 
-MLX_PATH = ./src/mlx
+MLX_PATH = ./mlx
 
 MLX_FLAG = $(MLX_PATH)/.libcompiled
 

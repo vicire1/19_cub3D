@@ -1,0 +1,14 @@
+C 06,5,255
+F 21,55,6
+NO ./texture/texture18.xpm
+SO ./texture/texture40.xpm
+WE ./texture/texture35.xpm
+EA ./texture/texture26.xpm
+
+
+000010000
+000101000
+001000100
+0100N0010
+100000001
+111111111

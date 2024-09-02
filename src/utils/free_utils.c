@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:32 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:01:36 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:56:47 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	free_all(t_data *data, char *msg, int exit_s)
 		mlx_destroy_window(data->ptr, data->win);
 	if (data->ptr)
 		free(data->ptr);
+	if (data)
+		free(data);
 	if (msg)
 		ft_printf_fd(2, "%s\n", msg);
 	exit(exit_s);

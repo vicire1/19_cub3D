@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:52:46 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:04:02 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:10:52 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw_minimap(t_data *data)
 		dist_x = data->rc->pl_pos[1] - 4.5;
 		while (x < SCREEN_W - (SCREEN_H / 45))
 		{
-			if (is_in_map(data, (int)dist_x, (int)dist_y) && is_wall(data,
+			if (is_in_map(data, dist_x, dist_y) && is_wall(data,
 					(int)dist_x, (int)dist_y))
 				my_mlx_pixel_put(data->img, x, y, 0x00404040);
 			else
