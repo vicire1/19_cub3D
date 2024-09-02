@@ -66,6 +66,14 @@
 # define WE 2
 # define EA 3
 
+typedef struct	s_parsing_col
+{
+	int	check_n;
+	int	check_v;
+	int	v1;
+	int	v2;
+	int	check_nb;	
+}				t_parsing_col;
 
 typedef struct	s_parsing
 {
@@ -146,6 +154,7 @@ typedef struct s_data
 	int		fd_map;
 	char	**all_file;
 	t_parsing pars;
+	t_parsing_col pars_col;
     void    *ptr;
     void    *win;
     t_img   *img;
@@ -161,9 +170,11 @@ void	init_pars_data(t_data *data);
 
 //colors_pasing
 // c_colors_parsing
+int		init_pars_col(t_data *data);
 void	check_color_c_data(t_data *data);
 void	convert_rgb_hex_cell(t_data *data);
 // f_colors_parsing
+void	check_comma(t_data *data, char c, int i);
 void	check_color_f_data(t_data *data);
 void	convert_rgb_hex_floor(t_data *data);
 
@@ -179,6 +190,32 @@ int		get_len_of_word(char *str);
 
 //map_parsing
 void	pars_map(t_data *data);
+
+//map_parsing_utils
+void	check_if_empty_line(t_data *data, int i);
+int		check_if_data_line(char *str);
+int		check_if_map_line(char *str);
+int		nb_line_map(t_data *data);
+void	check_map_is_closed(t_data *data, int x, int y);
+
+// player_parsing
+void	check_player_is_correct(t_data *data);
+void	recover_player_start_dir(t_data *data, char c);
+void	recover_player_start_pos(t_data *data);
+
+
+
+//parsing_lil_fctn
+void	col_c_in_line(t_data *data, int which);
+void	col_f_in_line(t_data *data, int which);
+void	no_in_line(t_data *data, int which);
+void	so_in_line(t_data *data, int which);
+void	we_in_line(t_data *data, int which);
+//parsing_lil_fctn_p2
+void	ea_in_line(t_data *data, int which);
+void	check_if_missing_data(t_data *data);
+void	check_if_to_much_data(t_data *data);
+int		map_char(char c);
 
 // MLX
 void    create_window(t_data *data);

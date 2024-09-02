@@ -6,7 +6,7 @@
 /*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:09:04 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/08/28 17:09:05 by lbirloue         ###   ########.fr       */
+/*   Updated: 2024/09/02 09:45:57 by lbirloue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,35 +46,17 @@ int	check_in_line(t_data *data, char *str, int which)
 	while (str[i] && is_white_space(str[i]))
 		i++;
 	if (!ft_strncmp(str + i, PARS_C, ft_strlen(PARS_C)))
-	{
-		data->pars.col_c_status++;
-		data->pars.col_c_line = which;
-	}
+		col_c_in_line(data, which);
 	else if (!ft_strncmp(str + i, PARS_F, ft_strlen(PARS_F)))
-	{
-		data->pars.col_f_status++;
-		data->pars.col_f_line = which;
-	}
+		col_f_in_line(data, which);
 	else if (!ft_strncmp(str + i, PARS_NO, ft_strlen(PARS_NO)))
-	{
-		data->pars.no_status++;
-		data->pars.no_line = which;
-	}
+		no_in_line(data, which);
 	else if (!ft_strncmp(str + i, PARS_SO, ft_strlen(PARS_SO)))
-	{
-		data->pars.so_status++;
-		data->pars.so_line = which;
-	}
+		so_in_line(data, which);
 	else if (!ft_strncmp(str + i, PARS_WE, ft_strlen(PARS_WE)))
-	{
-		data->pars.we_status++;
-		data->pars.we_line = which;
-	}
+		we_in_line(data, which);
 	else if (!ft_strncmp(str + i, PARS_EA, ft_strlen(PARS_EA)))
-	{
-		data->pars.ea_status++;
-		data->pars.ea_line = which;
-	}
+		ea_in_line(data, which);
 	else if (!check_empty_line_data(str))
 		;
 	else if (!check_map_line_data(str))
@@ -94,24 +76,6 @@ void	check_if_data(t_data *data)
 		check_in_line(data, data->all_file[i], i);
 		i++;
 	}
-	return ;
-}
-
-void	check_if_missing_data(t_data *data)
-{
-	if (data->pars.col_c_status == 0 || data->pars.col_f_status == 0
-		|| data->pars.no_status == 0 || data->pars.so_status == 0
-		|| data->pars.we_status == 0 || data->pars.ea_status == 0)
-		free_all(data, ERR ERR_MISSING_DATA, 1);
-	return ;
-}
-
-void	check_if_to_much_data(t_data *data)
-{
-	if (data->pars.col_c_status > 1 || data->pars.col_f_status > 1
-		|| data->pars.no_status > 1 || data->pars.so_status > 1
-		|| data->pars.we_status > 1 || data->pars.ea_status > 1)
-		free_all(data, ERR ERR_TO_MUCH_DATA, 1);
 	return ;
 }
 

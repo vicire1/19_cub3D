@@ -6,85 +6,11 @@
 /*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:07:22 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/08/28 17:08:45 by lbirloue         ###   ########.fr       */
+/*   Updated: 2024/09/02 09:50:16 by lbirloue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	check_if_empty_line(t_data *data, int i)
-{
-	int	j;
-
-	while (data->all_file[i])
-	{
-		j = 0;
-		while (data->all_file[i][j])
-		{
-			if (!is_white_space(data->all_file[i][j])
-				&& data->all_file[i][j] != '\n')
-				free_all(data, ERR ERR_DATA_AFTER_MAP, 1);
-			j++;
-		}
-		i++;
-	}
-}
-
-int	check_if_data_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			break ;
-		if (str[i] != ' ' && str[i] != '1' && str[i] != '0')
-			break ;
-		if (str[i] == '1' || str[i] == '0')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_if_map_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			break ;
-		if (str[i] == '1' || str[i] == '0')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	nb_line_map(t_data *data)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	ret = 0;
-	while (data->all_file[i] &&!check_if_data_line(data->all_file[i]))
-		i++;
-	while (check_if_map_line(data->all_file[i]))
-	{
-		ret++;
-		i++;
-	}
-	check_if_empty_line(data, i);
-	return (ret);
-}
 
 void	recup_map(t_data *data)
 {
@@ -113,14 +39,6 @@ void	recup_map(t_data *data)
 	data->pars.map_h = nb_line;
 	data->map[j] = NULL;
 	return ;
-}
-
-int	map_char(char c)
-{
-	if (c != ' ' && c != '1' && c != '0' && c != 'N'
-		&& c != 'S' && c != 'W' && c != 'E' && c != '\n')
-		return (0);
-	return (1);
 }
 
 void	check_map_data(t_data *data)
@@ -188,96 +106,6 @@ void	fill_space_map(t_data *data)
 		i++;
 	}
 	return ;
-}
-
-void	check_player_is_correct(t_data *data)
-{
-	int	i;
-	int	j;
-	int	check;
-
-	i = 0;
-	check = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-				|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
-				check++;
-			if (check > 1)
-				free_all(data, ERR ERR_PLAYER_CNTR, 1);
-			j++;
-		}
-		i++;
-	}
-	if (check < 1)
-		free_all(data, ERR ERR_PLAYER_LESS_CNTR, 1);
-	return ;
-}
-
-void	recover_player_start_dir(t_data *data, char c)
-{
-	if (c == 'N')
-	{
-		data->rc->pl_dir[0] = -1;
-		data->rc->plane[1] = FOV;
-	}
-	if (c == 'S')
-	{
-		data->rc->pl_dir[0] = 1;
-		data->rc->plane[1] = -FOV;
-	}
-	if (c == 'W')
-	{
-		data->rc->pl_dir[1] = -1;
-		data->rc->plane[0] = -FOV;
-	}
-	if (c == 'E')
-	{
-		data->rc->pl_dir[1] = 1;
-		data->rc->plane[0] = FOV;
-	}
-}
-
-void	recover_player_start_pos(t_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
-				|| data->map[y][x] == 'W' || data->map[y][x] == 'E')
-			{
-				data->rc->pl_pos[0] = y + 0.5;
-				data->rc->pl_pos[1] = x + 0.5;
-				recover_player_start_dir(data, data->map[y][x]);
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-	return ;
-}
-
-void	check_map_is_closed(t_data *data, int x, int y)
-{
-	if (x < 0 || y < 0 || data->map[y][x] == '1' || data->map[y][x] == 'O')
-		return ;
-	if (data->map[y][x] == ' ' || data->map[y][x] == '\n' || !data->map[y][x])
-		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
-	data->map[y][x] = 'O';
-	check_map_is_closed(data, x - 1, y);
-	check_map_is_closed(data, x + 1, y);
-	check_map_is_closed(data, x, y - 1);
-	check_map_is_closed(data, x, y + 1);
 }
 
 void	pars_map(t_data *data)
