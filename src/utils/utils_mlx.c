@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_mlx.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 17:03:39 by vdecleir          #+#    #+#             */
+/*   Updated: 2024/08/28 17:04:06 by vdecleir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -5,16 +17,17 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 uint32_t	get_color_value(t_data *data)
 {
-	int	pix_index;
-	unsigned char *pixel;
-	uint32_t color;
+	int				pix_index;
+	unsigned char	*pixel;
+	uint32_t		color;
 
-	pix_index = (TEX_SIZE * data->rc->tex_y + data->rc->tex_x) * (data->txtr[data->rc->side].bits_per_pixel / 8);
+	pix_index = (TEX_SIZE * data->rc->tex_y + data->rc->tex_x)
+		* (data->txtr[data->rc->side].bits_per_pixel / 8);
 	pixel = (unsigned char *)&data->txtr[data->rc->side].addr[pix_index];
 	color = (pixel[2] << 16) | (pixel[1] << 8) | pixel[0];
 	return (color);
@@ -22,8 +35,8 @@ uint32_t	get_color_value(t_data *data)
 
 void	draw_lines(t_data *data, int i)
 {
-	uint32_t	color;
-	int			n;
+	uint32_t color;
+	int n;
 
 	n = -1;
 	while (++n < data->rc->line_start)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 17:03:32 by vdecleir          #+#    #+#             */
+/*   Updated: 2024/08/28 17:04:02 by vdecleir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	free_str_tab(char **str)
@@ -19,7 +31,7 @@ void	free_str_tab(char **str)
 
 void	free_tex_path(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 4)
