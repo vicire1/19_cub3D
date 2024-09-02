@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/09/02 11:25:02 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/09/02 11:33:39 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS =	src/main.c \
 		src/parsing/walls_parsing/wall_parsing_utils.c \
 		src/utils/free_utils.c \
 		src/utils/libft_utils.c \
+		src/utils/libft_utils2.c \
 		src/utils/parsing_utils.c \
 		src/gnl/get_next_line.c \
 		src/gnl/get_next_line_utils.c \

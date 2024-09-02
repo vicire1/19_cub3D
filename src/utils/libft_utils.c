@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 11:32:39 by vdecleir          #+#    #+#             */
+/*   Updated: 2024/09/02 11:33:11 by vdecleir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 char	*ft_strdup(const char *s, t_data *data)
@@ -77,7 +89,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return ((size_t)ft_strlen(src));
 }
 
-
 char	*ft_strjoin(char const *s1, char const *s2, t_data *data)
 {
 	char	*ret;
@@ -104,31 +115,4 @@ char	*ft_strjoin(char const *s1, char const *s2, t_data *data)
 	}
 	ret[i] = 0;
 	return (ret);
-}
-
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	is_white_space(char c)
-{
-	if (c == ' ' || (c >= '\t' && c <= '\r'))
-		return (1);
-	return (0);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != 0)
-		i++;
-	return (i);
 }

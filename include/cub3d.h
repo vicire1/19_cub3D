@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:59:54 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:26:48 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:31:25 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,41 +78,41 @@
 # define WE 2
 # define EA 3
 
-typedef struct	s_parsing_col
+typedef struct s_parsing_col
 {
-	int	check_n;
-	int	check_v;
-	int	v1;
-	int	v2;
-	int	check_nb;	
-}				t_parsing_col;
+	int				check_n;
+	int				check_v;
+	int				v1;
+	int				v2;
+	int				check_nb;
+}					t_parsing_col;
 
 typedef struct s_parsing
 {
-	int			no_line;
-	int			so_line;
-	int			we_line;
-	int			ea_line;
-	int			col_c_line;
-	int			col_f_line;
-	int			no_status;
-	int			so_status;
-	int			we_status;
-	int			ea_status;
-	int			col_c_status;
-	int			col_f_status;
-	int			longest_map_len;
-	int			map_h;
-}				t_parsing;
+	int				no_line;
+	int				so_line;
+	int				we_line;
+	int				ea_line;
+	int				col_c_line;
+	int				col_f_line;
+	int				no_status;
+	int				so_status;
+	int				we_status;
+	int				ea_status;
+	int				col_c_status;
+	int				col_f_status;
+	int				longest_map_len;
+	int				map_h;
+}					t_parsing;
 
 typedef struct s_img
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_img;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_img;
 
 typedef struct s_rc
 {
@@ -154,147 +154,143 @@ typedef struct s_rc
 	int		tex_y;
 	double	tex_pos;
 	double	step;
-}				t_rc;
+}					t_rc;
 
 typedef struct s_data
 {
-	char		*path[4];
-	t_img		txtr[4];
-	void		*gun;
-	void		*shoot_img;
-	int			color_f[3];
-	int			floor_color;
-	int			color_c[3];
-	int			cell_color;
-	char		**map;
-	int			fd_map;
-	char		**all_file;
-	t_parsing	pars;
-	t_parsing_col pars_col;
-	void		*ptr;
-	void		*win;
-	t_img		*img;
-	t_rc		*rc;
-	int			counter;
-}				t_data;
+	char			*path[4];
+	t_img			txtr[4];
+	void			*gun;
+	void			*shoot_img;
+	int				color_f[3];
+	int				floor_color;
+	int				color_c[3];
+	int				cell_color;
+	char			**map;
+	int				fd_map;
+	char			**all_file;
+	t_parsing		pars;
+	t_parsing_col	pars_col;
+	void			*ptr;
+	void			*win;
+	t_img			*img;
+	t_rc			*rc;
+	int				counter;
+}					t_data;
 
 // parsing
-void			parsing(int ac, char **av, t_data *data);
+void				parsing(int ac, char **av, t_data *data);
 // paring_data
-void			init_pars_data(t_data *data);
+void				init_pars_data(t_data *data);
 
 // colors_pasing
 // c_colors_parsing
-int		init_pars_col(t_data *data);
-void			check_color_c_data(t_data *data);
-void			convert_rgb_hex_cell(t_data *data);
+int					init_pars_col(t_data *data);
+void				check_color_c_data(t_data *data);
+void				convert_rgb_hex_cell(t_data *data);
 // f_colors_parsing
-void	check_comma(t_data *data, char c, int i);
-void			check_color_f_data(t_data *data);
-void			convert_rgb_hex_floor(t_data *data);
+void				check_comma(t_data *data, char c, int i);
+void				check_color_f_data(t_data *data);
+void				convert_rgb_hex_floor(t_data *data);
 
 // walls_parsing
 // wall_parsing
-void			check_ea_data(t_data *data);
-void			check_we_data(t_data *data);
-void			check_so_data(t_data *data);
-void			check_no_data(t_data *data);
+void				check_ea_data(t_data *data);
+void				check_we_data(t_data *data);
+void				check_so_data(t_data *data);
+void				check_no_data(t_data *data);
 // wall parsing_utils
-void			check_after_word(t_data *data, char *str);
-int				get_len_of_word(char *str);
+void				check_after_word(t_data *data, char *str);
+int					get_len_of_word(char *str);
 
 // map_parsing
-void			pars_map(t_data *data);
+void				pars_map(t_data *data);
 
-//map_parsing_utils
-void	check_if_empty_line(t_data *data, int i);
-int		check_if_data_line(char *str);
-int		check_if_map_line(char *str);
-int		nb_line_map(t_data *data);
-void	check_map_is_closed(t_data *data, int x, int y);
-
-// player_parsing
-void	check_player_is_correct(t_data *data);
-void	recover_player_start_dir(t_data *data, char c);
-void	recover_player_start_pos(t_data *data);
-
-
-
-//parsing_lil_fctn
-void	col_c_in_line(t_data *data, int which);
-void	col_f_in_line(t_data *data, int which);
-void	no_in_line(t_data *data, int which);
-void	so_in_line(t_data *data, int which);
-void	we_in_line(t_data *data, int which);
-//parsing_lil_fctn_p2
-void	ea_in_line(t_data *data, int which);
-void	check_if_missing_data(t_data *data);
-void	check_if_to_much_data(t_data *data);
-int		map_char(char c);
-
-//map_parsing_utils
-void	check_if_empty_line(t_data *data, int i);
-int		check_if_data_line(char *str);
-int		check_if_map_line(char *str);
-int		nb_line_map(t_data *data);
-void	check_map_is_closed(t_data *data, int x, int y);
+// map_parsing_utils
+void				check_if_empty_line(t_data *data, int i);
+int					check_if_data_line(char *str);
+int					check_if_map_line(char *str);
+int					nb_line_map(t_data *data);
+void				check_map_is_closed(t_data *data, int x, int y);
 
 // player_parsing
-void	check_player_is_correct(t_data *data);
-void	recover_player_start_dir(t_data *data, char c);
-void	recover_player_start_pos(t_data *data);
+void				check_player_is_correct(t_data *data);
+void				recover_player_start_dir(t_data *data, char c);
+void				recover_player_start_pos(t_data *data);
 
+// parsing_lil_fctn
+void				col_c_in_line(t_data *data, int which);
+void				col_f_in_line(t_data *data, int which);
+void				no_in_line(t_data *data, int which);
+void				so_in_line(t_data *data, int which);
+void				we_in_line(t_data *data, int which);
+// parsing_lil_fctn_p2
+void				ea_in_line(t_data *data, int which);
+void				check_if_missing_data(t_data *data);
+void				check_if_to_much_data(t_data *data);
+int					map_char(char c);
 
+// map_parsing_utils
+void				check_if_empty_line(t_data *data, int i);
+int					check_if_data_line(char *str);
+int					check_if_map_line(char *str);
+int					nb_line_map(t_data *data);
+void				check_map_is_closed(t_data *data, int x, int y);
 
-//parsing_lil_fctn
-void	col_c_in_line(t_data *data, int which);
-void	col_f_in_line(t_data *data, int which);
-void	no_in_line(t_data *data, int which);
-void	so_in_line(t_data *data, int which);
-void	we_in_line(t_data *data, int which);
-//parsing_lil_fctn_p2
-void	ea_in_line(t_data *data, int which);
-void	check_if_missing_data(t_data *data);
-void	check_if_to_much_data(t_data *data);
-int		map_char(char c);
+// player_parsing
+void				check_player_is_correct(t_data *data);
+void				recover_player_start_dir(t_data *data, char c);
+void				recover_player_start_pos(t_data *data);
+
+// parsing_lil_fctn
+void				col_c_in_line(t_data *data, int which);
+void				col_f_in_line(t_data *data, int which);
+void				no_in_line(t_data *data, int which);
+void				so_in_line(t_data *data, int which);
+void				we_in_line(t_data *data, int which);
+// parsing_lil_fctn_p2
+void				ea_in_line(t_data *data, int which);
+void				check_if_missing_data(t_data *data);
+void				check_if_to_much_data(t_data *data);
+int					map_char(char c);
 
 // MLX
-void			create_window(t_data *data);
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			draw_lines(t_data *data, int i);
-int				cross_escape(t_data *data);
-int				key_release(int keysym, t_data *data);
-int				key_press(int keysym, t_data *data);
-void			init_rc_struct(t_data *data);
-void			put_minimap(t_data *data);
-int				is_in_map(t_data *data, int x, int y);
-int				is_wall(t_data *data, int x, int y);
-void			mouse_rot(t_data *data);
-void			gun_shoot(t_data *data);
+void				create_window(t_data *data);
+void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void				draw_lines(t_data *data, int i);
+int					cross_escape(t_data *data);
+int					key_release(int keysym, t_data *data);
+int					key_press(int keysym, t_data *data);
+void				init_rc_struct(t_data *data);
+void				put_minimap(t_data *data);
+int					is_in_map(t_data *data, int x, int y);
+int					is_wall(t_data *data, int x, int y);
+void				mouse_rot(t_data *data);
+void				gun_shoot(t_data *data);
 
 // raycasting
-void			raycasting_loop(t_data *data);
-int				move(t_data *data);
-void			rotate(t_data *data, double speed);
+void				raycasting_loop(t_data *data);
+int					move(t_data *data);
+void				rotate(t_data *data, double speed);
 
 // utils libft
-char			*ft_strdup(const char *s, t_data *data);
-char			*ft_substr(char const *s, unsigned int start, size_t len,
-					t_data *data);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
-int				ft_isdigit(int c);
-int				is_white_space(char c);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char			*ft_strjoin(char const *s1, char const *s2, t_data *data);
-size_t			ft_strlen(const char *str);
+char				*ft_strdup(const char *s, t_data *data);
+char				*ft_substr(char const *s, unsigned int start, size_t len,
+						t_data *data);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_isdigit(int c);
+int					is_white_space(char c);
+size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char				*ft_strjoin(char const *s1, char const *s2, t_data *data);
+size_t				ft_strlen(const char *str);
 
 // utils parsing
-void			copy_all_file(t_data *data, char *map_name);
-int				ft_strlen_before_n_line(char *str);
-int				recover_tab_size(char **tab);
-char			*mall_space_line(int len, t_data *data);
+void				copy_all_file(t_data *data, char *map_name);
+int					ft_strlen_before_n_line(char *str);
+int					recover_tab_size(char **tab);
+char				*mall_space_line(int len, t_data *data);
 
 // free_utils
-void			free_all(t_data *data, char *msg, int exit_s);
+void				free_all(t_data *data, char *msg, int exit_s);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:09:25 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/08/28 17:09:26 by lbirloue         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:34:21 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	parsing_arg(int ac, char **av, t_data *data)
 void	parsing(int ac, char **av, t_data *data)
 {
 	parsing_arg(ac, av, data);
-	// printf("ok\n");
 	copy_all_file(data, av[1]);
 	init_pars_data(data);
 	init_rc_struct(data);
