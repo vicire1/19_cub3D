@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 09:47:20 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/09/02 14:29:23 by lbirloue         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:48:32 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ int	nb_line_map(t_data *data)
 
 void	check_map_is_closed(t_data *data, int x, int y)
 {
+	if (x < 0 || y < 0 || !data->map[y]|| !data->map[y][x]
+		|| data->map[y][x] == ' ' || data->map[y][x] == '\n')
+		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
 	if (data->map[y][x] == '1' || data->map[y][x] == 'O')
 		return ;
-	if (x < 0 || y < 0 || data->map[y][x] == ' '
-		|| data->map[y][x] == '\n' || !data->map[y][x] || !data->map[y])
-		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
 	data->map[y][x] = 'O';
 	check_map_is_closed(data, x - 1, y);
 	check_map_is_closed(data, x + 1, y);
