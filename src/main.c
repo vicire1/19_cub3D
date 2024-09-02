@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:48 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/28 17:03:49 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:03:39 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_null(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 4)

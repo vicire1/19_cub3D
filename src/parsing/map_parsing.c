@@ -36,7 +36,6 @@ void	recup_map(t_data *data)
 		j++;
 		i++;
 	}
-	data->pars.map_h = nb_line;
 	data->map[j] = NULL;
 	return ;
 }
@@ -59,6 +58,7 @@ void	check_map_data(t_data *data)
 		}
 		x++;
 	}
+	data->pars.map_h = x;
 	return ;
 }
 

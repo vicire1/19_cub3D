@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:45 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/08/28 17:05:40 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:03:03 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,12 @@ void	load_xpm(t_data *data)
 			&h);
 	data->txtr[EA].img = mlx_xpm_file_to_image(data->ptr, data->path[EA], &w,
 			&h);
+	data->gun = mlx_xpm_file_to_image(data->ptr, "./texture/machine_gun.xpm",
+			&w, &h);
+	data->shoot_img = mlx_xpm_file_to_image(data->ptr, "texture/explosion.xpm",
+			&w, &h);
 	if (!data->txtr[NO].img || !data->txtr[SO].img || !data->txtr[WE].img
-		|| !data->txtr[EA].img)
+		|| !data->txtr[EA].img || !data->gun || !data->shoot_img)
 		free_all(data, ERR ERR_MALLOC, 1);
 	get_textures_addr(data);
 }
@@ -62,7 +66,10 @@ void	init_rc_struct(t_data *data)
 	data->rc->move_r = 0;
 	data->rc->rot_l = 0;
 	data->rc->rot_r = 0;
+	data->rc->mouse = 0;
+	data->rc->shoot = 0;
 	data->rc->time = 0;
+	data->counter = 0;
 }
 
 void	create_window(t_data *data)
