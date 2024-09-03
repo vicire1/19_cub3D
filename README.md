@@ -70,15 +70,6 @@ The **cub3D** project is inspired by the world-famous game Wolfenstein 3D, the f
   - **Error Handling:**
     - If the .cub file is misconfigured, the program must exit with an error message and return `Error\n` followed by an explicit error message.
 
-- **Bonus Part:**
-  - Implement additional features for a more advanced gameplay experience:
-    - Wall collisions to prevent walking through walls.
-    - A minimap showing the player's position within the maze.
-    - Doors that can open and close.
-    - Animated sprites for enemies or objects.
-    - Shooting with a weapon by pressing the spacebar.
-    - Rotate the view using the mouse. The mouse cursor is hidden by default and only appears when you hold the Tab key, allowing you to control the view`s rotation with mouse movements.
-
 ## Compilation
 
 To compile the project, ensure that your Makefile includes the following rules: `all`, `clean`, `fclean`, `re`, and `bonus` (if applicable).
