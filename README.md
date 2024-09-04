@@ -6,6 +6,10 @@
 
 The **cub3D** project is inspired by the world-famous game Wolfenstein 3D, the first-ever first-person shooter (FPS). This project will introduce you to ray-casting, where your goal is to create a dynamic view inside a maze, allowing you to navigate and find your way. You will develop a simple 3D graphical representation from a first-person perspective using the miniLibX library.
 
+## Preview
+
+https://github.com/user-attachments/assets/4ceef681-47d6-43db-b3d3-823f2e52beda
+
 ## Project Objectives
 
 - Learn and implement the basics of ray-casting.
