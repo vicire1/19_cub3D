@@ -6,7 +6,7 @@
 #    By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 16:53:35 by vdecleir          #+#    #+#              #
-#    Updated: 2024/09/02 15:12:03 by lbirloue         ###   ########.fr        #
+#    Updated: 2024/09/05 08:28:53 by lbirloue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS =	src/main.c \
 		src/parsing/parsing_lil_fctn.c \
 		src/parsing/parsing_lil_fctn_p2.c \
 		src/parsing/map_parsing.c \
+		src/parsing/map_surround.c \
 		src/parsing/map_parsing_utils.c \
 		src/parsing/player_parsing.c \
 		src/parsing/colors_parsing/c_colors_parsing.c \

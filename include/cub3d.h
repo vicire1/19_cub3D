@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:59:54 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 16:44:16 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/05 08:39:20 by lbirloue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 
 # define ERR_PLAYER_CNTR "\033[1;31mMore than one player\n\033[00m"
 # define ERR_MAP_NOT_CLOSED "\033[1;31mMap is not closed\n\033[00m"
+# define ERR_MAP_NOT_CLOSE_BY_ONE "\033[1;31mOnly \'1\' can surround the map\n\033[00m"
 # define ERR_PLAYER_LESS_CNTR "\033[1;31mNo player\n\033[00m"
 
 # define FOV 0.8
@@ -204,6 +205,9 @@ int					get_len_of_word(char *str);
 
 // map_parsing
 void				pars_map(t_data *data);
+
+// map_surround
+void				check_map_is_surround(t_data *data);
 
 // map_parsing_utils
 void				check_if_empty_line(t_data *data, int i);

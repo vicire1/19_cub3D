@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:07:22 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/09/02 16:49:37 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/05 08:28:18 by lbirloue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,5 @@ void	pars_map(t_data *data)
 	recover_player_start_pos(data);
 	check_map_is_closed(data, (int)data->rc->pl_pos[1],
 		(int)data->rc->pl_pos[0]);
+	check_map_is_surround(data);
 }
