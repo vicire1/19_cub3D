@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbirloue <lbirloue@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 09:49:30 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/09/02 09:50:38 by lbirloue         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:03:14 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	recover_player_start_pos(t_data *data)
 				data->rc->pl_pos[0] = y + 0.5;
 				data->rc->pl_pos[1] = x + 0.5;
 				recover_player_start_dir(data, data->map[y][x]);
+				data->map[y][x] = '0';
 				return ;
 			}
 			x++;

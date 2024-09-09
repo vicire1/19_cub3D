@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:07:22 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/09/02 16:49:37 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:08:13 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	recup_map(t_data *data)
 		i++;
 	}
 	data->map[j] = NULL;
-	return ;
 }
 
 void	check_map_data(t_data *data)
@@ -59,7 +58,6 @@ void	check_map_data(t_data *data)
 		x++;
 	}
 	data->pars.map_h = x;
-	return ;
 }
 
 void	recover_longest_map_line(t_data *data)
@@ -76,7 +74,6 @@ void	recover_longest_map_line(t_data *data)
 			data->pars.longest_map_len = tmp_len;
 		x++;
 	}
-	return ;
 }
 
 void	fill_space_map(t_data *data)
@@ -105,7 +102,6 @@ void	fill_space_map(t_data *data)
 		tmp = NULL;
 		i++;
 	}
-	return ;
 }
 
 void	pars_map(t_data *data)
@@ -116,6 +112,5 @@ void	pars_map(t_data *data)
 	fill_space_map(data);
 	check_player_is_correct(data);
 	recover_player_start_pos(data);
-	check_map_is_closed(data, (int)data->rc->pl_pos[1],
-		(int)data->rc->pl_pos[0]);
+	check_map_surrounded(data);
 }

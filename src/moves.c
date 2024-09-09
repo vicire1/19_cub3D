@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:03:51 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 11:04:41 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:04:01 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	actualise_pos(t_data *data, double new_pos_x, double new_pos_y)
 		pos_coll_y = new_pos_y + 0.125;
 	else
 		pos_coll_y = new_pos_y - 0.125;
-	if (data->map[(int)pos_coll_y][(int)data->rc->pl_pos[1]] == 'O')
+	if (data->map[(int)pos_coll_y][(int)data->rc->pl_pos[1]] == '0')
 		data->rc->pl_pos[0] = new_pos_y;
-	if (data->map[(int)data->rc->pl_pos[0]][(int)pos_coll_x] == 'O')
+	if (data->map[(int)data->rc->pl_pos[0]][(int)pos_coll_x] == '0')
 		data->rc->pl_pos[1] = new_pos_x;
 }
 

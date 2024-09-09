@@ -6,15 +6,15 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 10:59:54 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/09/02 16:44:16 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:16:09 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../src/ft_printf_fd/ft_printf.h"
 # include "../mlx/mlx.h"
+# include "../src/ft_printf_fd/ft_printf.h"
 # include "./get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
@@ -47,6 +47,7 @@
 
 # define ERR_PLAYER_CNTR "\033[1;31mMore than one player\n\033[00m"
 # define ERR_MAP_NOT_CLOSED "\033[1;31mMap is not closed\n\033[00m"
+# define ERR_MAP_NOT_SURR "\033[1;31mMap is surrounded by '1'\n\033[00m"
 # define ERR_PLAYER_LESS_CNTR "\033[1;31mNo player\n\033[00m"
 
 # define FOV 0.8
@@ -153,7 +154,7 @@ typedef struct s_rc
 	int		tex_y;
 	double	tex_pos;
 	double	step;
-}					t_rc;
+}	t_rc;
 
 typedef struct s_data
 {
@@ -210,7 +211,6 @@ void				check_if_empty_line(t_data *data, int i);
 int					check_if_data_line(char *str);
 int					check_if_map_line(char *str);
 int					nb_line_map(t_data *data);
-void				check_map_is_closed(t_data *data, int x, int y);
 
 // player_parsing
 void				check_player_is_correct(t_data *data);
@@ -234,7 +234,7 @@ void				check_if_empty_line(t_data *data, int i);
 int					check_if_data_line(char *str);
 int					check_if_map_line(char *str);
 int					nb_line_map(t_data *data);
-void				check_map_is_closed(t_data *data, int x, int y);
+void				check_map_surrounded(t_data *data);
 
 // player_parsing
 void				check_player_is_correct(t_data *data);
@@ -252,6 +252,7 @@ void				ea_in_line(t_data *data, int which);
 void				check_if_missing_data(t_data *data);
 void				check_if_to_much_data(t_data *data);
 int					map_char(char c);
+void				check_near_space(t_data *data, int i, int j);
 
 // MLX
 void				create_window(t_data *data);

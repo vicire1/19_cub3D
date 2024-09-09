@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 09:47:20 by lbirloue          #+#    #+#             */
-/*   Updated: 2024/09/02 16:48:32 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:10:55 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,25 @@ int	nb_line_map(t_data *data)
 	return (ret);
 }
 
-void	check_map_is_closed(t_data *data, int x, int y)
+void	check_map_surrounded(t_data *data)
 {
-	if (x < 0 || y < 0 || !data->map[y]|| !data->map[y][x]
-		|| data->map[y][x] == ' ' || data->map[y][x] == '\n')
-		free_all(data, ERR ERR_MAP_NOT_CLOSED, 1);
-	if (data->map[y][x] == '1' || data->map[y][x] == 'O')
-		return ;
-	data->map[y][x] = 'O';
-	check_map_is_closed(data, x - 1, y);
-	check_map_is_closed(data, x + 1, y);
-	check_map_is_closed(data, x, y - 1);
-	check_map_is_closed(data, x, y + 1);
+	int	i;
+	int	j;
+
+	i = -1;
+	while (data->map[++i])
+	{
+		j = -1;
+		while (data->map[i][++j])
+		{
+			if ((i == 0 || i == data->pars.map_h - 1) && (data->map[i][j] != '1'
+				&& data->map[i][j] != ' '))
+				free_all(data, ERR ERR_MAP_NOT_SURR, 1);
+			if ((j == 0 || j == data->pars.longest_map_len - 1)
+				&& (data->map[i][j] != '1' && data->map[i][j] != ' '))
+				free_all(data, ERR ERR_MAP_NOT_SURR, 1);
+			if (data->map[i][j] == ' ')
+				check_near_space(data, i, j);
+		}
+	}
 }
