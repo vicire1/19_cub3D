@@ -76,7 +76,7 @@ https://github.com/user-attachments/assets/4ceef681-47d6-43db-b3d3-823f2e52beda
 
 ## Compilation
 
-To compile the project, ensure that your Makefile includes the following rules: `all`, `clean`, `fclean`, `re`, and `bonus` (if applicable).
+To compile the project, ensure that your Makefile includes the following rules: `all`, `clean`, `fclean` and `re`.
 
 1. **Compile the program:**
 
