@@ -1,6 +1,6 @@
 # Cub3D
 
-
+<img width="691" alt="Screen Shot 2024-09-13 at 3 03 49 PM" src="https://github.com/user-attachments/assets/d859bf4f-fa3c-4ee1-83ed-ae04d691816c">
 
 ## Description
 
